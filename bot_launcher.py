@@ -20,11 +20,18 @@ import threading
 import time
 import logging
 import webbrowser
+import base64
+import hashlib
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
 import sqlite3
+try:
+    from cryptography.fernet import Fernet
+    CRYPTO_AVAILABLE = True
+except ImportError:
+    CRYPTO_AVAILABLE = False
 
 # PyQt5 imports
 from PyQt5.QtWidgets import (
@@ -34,7 +41,8 @@ from PyQt5.QtWidgets import (
     QProgressBar, QStatusBar, QMenuBar, QMenu, QAction, QMessageBox,
     QDialog, QDialogButtonBox, QFormLayout, QGroupBox, QSplitter,
     QTreeWidget, QTreeWidgetItem, QHeaderView, QFrame, QScrollArea,
-    QSpinBox, QFileDialog, QSystemTrayIcon
+    QSpinBox, QFileDialog, QSystemTrayIcon, QListWidget, QListWidgetItem,
+    QAbstractItemView, QInputDialog, QToolButton
 )
 from PyQt5.QtCore import (
     Qt, QTimer, QThread, pyqtSignal, QSize, QRect, QSettings,
@@ -63,6 +71,18 @@ class BotConfig:
             self.modules = []
         if self.github_repos is None:
             self.github_repos = []
+
+@dataclass
+class Credential:
+    name: str
+    type: str  # 'token', 'webhook', 'api_key', 'url', 'other'
+    value: str
+    description: str = ""
+    created_at: str = ""
+    
+    def __post_init__(self):
+        if not self.created_at:
+            self.created_at = datetime.now().isoformat()
 
 class BotMonitorThread(QThread):
     """Background thread for monitoring bot status"""
@@ -192,6 +212,423 @@ class BotCreatorDialog(QDialog):
             port=self.port_spin.value(),
             status="stopped",
             created_at=datetime.now().isoformat()
+        )
+        
+        super().accept()
+
+class CredentialsManagerDialog(QDialog):
+    """Dialog for managing Discord credentials, tokens, webhooks, etc."""
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.parent = parent
+        self.setWindowTitle("🔐 Credentials Manager")
+        self.setModal(True)
+        self.resize(700, 500)
+        
+        self.credentials = self.load_credentials()
+        self.setup_ui()
+        self.refresh_credentials_list()
+    
+    def setup_ui(self):
+        layout = QVBoxLayout(self)
+        
+        # Header
+        header_label = QLabel("Manage Discord Tokens, Webhooks, and API Keys")
+        header_label.setStyleSheet("font-size: 14px; font-weight: bold; margin: 10px;")
+        header_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(header_label)
+        
+        # Main content
+        content_layout = QHBoxLayout()
+        
+        # Left side - Credentials list
+        left_group = QGroupBox("Stored Credentials")
+        left_layout = QVBoxLayout()
+        
+        self.credentials_list = QListWidget()
+        self.credentials_list.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.credentials_list.itemSelectionChanged.connect(self.on_credential_selected)
+        left_layout.addWidget(self.credentials_list)
+        
+        # List buttons
+        list_buttons = QHBoxLayout()
+        
+        self.add_btn = QPushButton("➕ Add")
+        self.add_btn.clicked.connect(self.add_credential)
+        self.add_btn.setToolTip("Add a new credential")
+        list_buttons.addWidget(self.add_btn)
+        
+        self.edit_btn = QPushButton("✏️ Edit")
+        self.edit_btn.clicked.connect(self.edit_credential)
+        self.edit_btn.setToolTip("Edit the selected credential")
+        self.edit_btn.setEnabled(False)
+        list_buttons.addWidget(self.edit_btn)
+        
+        self.delete_btn = QPushButton("🗑️ Delete")
+        self.delete_btn.clicked.connect(self.delete_credential)
+        self.delete_btn.setToolTip("Delete the selected credential")
+        self.delete_btn.setEnabled(False)
+        list_buttons.addWidget(self.delete_btn)
+        
+        self.copy_btn = QPushButton("📋 Copy")
+        self.copy_btn.clicked.connect(self.copy_credential_value)
+        self.copy_btn.setToolTip("Copy credential value to clipboard")
+        self.copy_btn.setEnabled(False)
+        list_buttons.addWidget(self.copy_btn)
+        
+        left_layout.addLayout(list_buttons)
+        left_group.setLayout(left_layout)
+        content_layout.addWidget(left_group, 2)
+        
+        # Right side - Credential details
+        right_group = QGroupBox("Credential Details")
+        right_layout = QFormLayout()
+        
+        self.name_label = QLabel("-")
+        right_layout.addRow("Name:", self.name_label)
+        
+        self.type_label = QLabel("-")
+        right_layout.addRow("Type:", self.type_label)
+        
+        self.description_label = QLabel("-")
+        self.description_label.setWordWrap(True)
+        right_layout.addRow("Description:", self.description_label)
+        
+        self.value_label = QLabel("-")
+        self.value_label.setStyleSheet("font-family: monospace; background-color: #f0f0f0; padding: 5px; border: 1px solid #ccc;")
+        self.value_label.setWordWrap(True)
+        right_layout.addRow("Value:", self.value_label)
+        
+        self.created_label = QLabel("-")
+        right_layout.addRow("Created:", self.created_label)
+        
+        right_group.setLayout(right_layout)
+        content_layout.addWidget(right_group, 1)
+        
+        layout.addLayout(content_layout)
+        
+        # Quick access section
+        quick_group = QGroupBox("🚀 Quick Access")
+        quick_layout = QHBoxLayout()
+        
+        self.quick_combo = QComboBox()
+        self.quick_combo.setToolTip("Select a credential to quickly copy to clipboard")
+        quick_layout.addWidget(self.quick_combo)
+        
+        self.quick_copy_btn = QPushButton("📋 Quick Copy")
+        self.quick_copy_btn.clicked.connect(self.quick_copy_selected)
+        self.quick_copy_btn.setToolTip("Copy selected credential to clipboard")
+        quick_layout.addWidget(self.quick_copy_btn)
+        
+        quick_group.setLayout(quick_layout)
+        layout.addWidget(quick_group)
+        
+        # Bottom buttons
+        button_box = QDialogButtonBox(QDialogButtonBox.Close)
+        button_box.button(QDialogButtonBox.Close).setToolTip("Close the credentials manager")
+        button_box.rejected.connect(self.accept)
+        layout.addWidget(button_box)
+    
+    def load_credentials(self) -> Dict[str, Credential]:
+        """Load credentials from encrypted storage"""
+        credentials_file = self.parent.workspace_dir / "credentials.enc" if self.parent else Path("credentials.enc")
+        
+        if not credentials_file.exists():
+            return {}
+        
+        try:
+            if CRYPTO_AVAILABLE:
+                # Load encrypted credentials
+                key_file = credentials_file.parent / ".cred_key"
+                if key_file.exists():
+                    with open(key_file, 'rb') as f:
+                        key = f.read()
+                    
+                    fernet = Fernet(key)
+                    with open(credentials_file, 'rb') as f:
+                        encrypted_data = f.read()
+                    
+                    decrypted_data = fernet.decrypt(encrypted_data)
+                    data = json.loads(decrypted_data.decode())
+                    
+                    return {name: Credential(**cred) for name, cred in data.items()}
+            else:
+                # Fallback to base64 encoding (less secure)
+                with open(credentials_file, 'r') as f:
+                    encoded_data = f.read()
+                
+                decoded_data = base64.b64decode(encoded_data.encode()).decode()
+                data = json.loads(decoded_data)
+                
+                return {name: Credential(**cred) for name, cred in data.items()}
+                
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"Failed to load credentials: {e}")
+            return {}
+    
+    def save_credentials(self):
+        """Save credentials to encrypted storage"""
+        credentials_file = self.parent.workspace_dir / "credentials.enc" if self.parent else Path("credentials.enc")
+        
+        try:
+            data = {name: asdict(cred) for name, cred in self.credentials.items()}
+            json_data = json.dumps(data, indent=2)
+            
+            if CRYPTO_AVAILABLE:
+                # Save with encryption
+                key_file = credentials_file.parent / ".cred_key"
+                
+                if not key_file.exists():
+                    # Generate new encryption key
+                    key = Fernet.generate_key()
+                    with open(key_file, 'wb') as f:
+                        f.write(key)
+                    key_file.chmod(0o600)  # Restrict permissions
+                else:
+                    with open(key_file, 'rb') as f:
+                        key = f.read()
+                
+                fernet = Fernet(key)
+                encrypted_data = fernet.encrypt(json_data.encode())
+                
+                with open(credentials_file, 'wb') as f:
+                    f.write(encrypted_data)
+                    
+            else:
+                # Fallback to base64 encoding
+                encoded_data = base64.b64encode(json_data.encode()).decode()
+                with open(credentials_file, 'w') as f:
+                    f.write(encoded_data)
+            
+            credentials_file.chmod(0o600)  # Restrict permissions
+            
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to save credentials: {e}")
+    
+    def refresh_credentials_list(self):
+        """Refresh the credentials list and quick access combo"""
+        self.credentials_list.clear()
+        self.quick_combo.clear()
+        
+        for name, cred in self.credentials.items():
+            # List widget item with icon based on type
+            icon_map = {
+                'token': '🔑',
+                'webhook': '🔗',
+                'api_key': '🗝️',
+                'url': '🌐',
+                'other': '📝'
+            }
+            icon = icon_map.get(cred.type, '📝')
+            
+            item = QListWidgetItem(f"{icon} {name} ({cred.type})")
+            item.setData(Qt.UserRole, name)
+            self.credentials_list.addItem(item)
+            
+            # Quick access combo
+            self.quick_combo.addItem(f"{icon} {name}", name)
+    
+    def on_credential_selected(self):
+        """Handle credential selection"""
+        selected_items = self.credentials_list.selectedItems()
+        
+        if selected_items:
+            item = selected_items[0]
+            cred_name = item.data(Qt.UserRole)
+            cred = self.credentials.get(cred_name)
+            
+            if cred:
+                self.name_label.setText(cred.name)
+                self.type_label.setText(cred.type.title())
+                self.description_label.setText(cred.description or "No description")
+                
+                # Mask sensitive values
+                if cred.type in ['token', 'api_key']:
+                    masked_value = f"{cred.value[:8]}...{cred.value[-4:]}" if len(cred.value) > 12 else "***masked***"
+                    self.value_label.setText(masked_value)
+                else:
+                    self.value_label.setText(cred.value)
+                
+                self.created_label.setText(cred.created_at[:19].replace('T', ' '))
+                
+                # Enable buttons
+                self.edit_btn.setEnabled(True)
+                self.delete_btn.setEnabled(True)
+                self.copy_btn.setEnabled(True)
+            else:
+                self.clear_details()
+        else:
+            self.clear_details()
+    
+    def clear_details(self):
+        """Clear credential details display"""
+        self.name_label.setText("-")
+        self.type_label.setText("-")
+        self.description_label.setText("-")
+        self.value_label.setText("-")
+        self.created_label.setText("-")
+        
+        self.edit_btn.setEnabled(False)
+        self.delete_btn.setEnabled(False)
+        self.copy_btn.setEnabled(False)
+    
+    def add_credential(self):
+        """Add a new credential"""
+        dialog = CredentialEditDialog(self)
+        if dialog.exec_() == QDialog.Accepted and dialog.credential:
+            cred = dialog.credential
+            if cred.name in self.credentials:
+                QMessageBox.warning(self, "Warning", f"Credential '{cred.name}' already exists!")
+                return
+            
+            self.credentials[cred.name] = cred
+            self.save_credentials()
+            self.refresh_credentials_list()
+    
+    def edit_credential(self):
+        """Edit selected credential"""
+        selected_items = self.credentials_list.selectedItems()
+        if not selected_items:
+            return
+        
+        cred_name = selected_items[0].data(Qt.UserRole)
+        cred = self.credentials.get(cred_name)
+        
+        if cred:
+            dialog = CredentialEditDialog(self, cred)
+            if dialog.exec_() == QDialog.Accepted and dialog.credential:
+                new_cred = dialog.credential
+                
+                # Handle name change
+                if new_cred.name != cred_name:
+                    del self.credentials[cred_name]
+                
+                self.credentials[new_cred.name] = new_cred
+                self.save_credentials()
+                self.refresh_credentials_list()
+    
+    def delete_credential(self):
+        """Delete selected credential"""
+        selected_items = self.credentials_list.selectedItems()
+        if not selected_items:
+            return
+        
+        cred_name = selected_items[0].data(Qt.UserRole)
+        
+        reply = QMessageBox.question(self, "Delete Credential", 
+                                   f"Are you sure you want to delete '{cred_name}'?\n\nThis action cannot be undone.",
+                                   QMessageBox.Yes | QMessageBox.No)
+        
+        if reply == QMessageBox.Yes:
+            del self.credentials[cred_name]
+            self.save_credentials()
+            self.refresh_credentials_list()
+            self.clear_details()
+    
+    def copy_credential_value(self):
+        """Copy selected credential value to clipboard"""
+        selected_items = self.credentials_list.selectedItems()
+        if not selected_items:
+            return
+        
+        cred_name = selected_items[0].data(Qt.UserRole)
+        cred = self.credentials.get(cred_name)
+        
+        if cred:
+            clipboard = QApplication.clipboard()
+            clipboard.setText(cred.value)
+            self.parent.status_bar.showMessage(f"Copied '{cred_name}' to clipboard") if self.parent else None
+    
+    def quick_copy_selected(self):
+        """Quick copy from combo box selection"""
+        current_data = self.quick_combo.currentData()
+        if current_data:
+            cred = self.credentials.get(current_data)
+            if cred:
+                clipboard = QApplication.clipboard()
+                clipboard.setText(cred.value)
+                self.parent.status_bar.showMessage(f"Copied '{cred.name}' to clipboard") if self.parent else None
+
+class CredentialEditDialog(QDialog):
+    """Dialog for adding/editing credentials"""
+    
+    def __init__(self, parent=None, credential=None):
+        super().__init__(parent)
+        self.credential = None
+        self.editing_credential = credential
+        
+        self.setWindowTitle("Edit Credential" if credential else "Add Credential")
+        self.setModal(True)
+        self.resize(400, 300)
+        
+        self.setup_ui()
+        
+        if credential:
+            self.populate_fields(credential)
+    
+    def setup_ui(self):
+        layout = QVBoxLayout(self)
+        
+        # Form
+        form_layout = QFormLayout()
+        
+        self.name_edit = QLineEdit()
+        self.name_edit.setPlaceholderText("e.g., main_bot_token, webhook_logs")
+        self.name_edit.setToolTip("Unique name for this credential")
+        form_layout.addRow("Name:", self.name_edit)
+        
+        self.type_combo = QComboBox()
+        self.type_combo.addItems(['token', 'webhook', 'api_key', 'url', 'other'])
+        self.type_combo.setToolTip("Type of credential being stored")
+        form_layout.addRow("Type:", self.type_combo)
+        
+        self.value_edit = QLineEdit()
+        self.value_edit.setPlaceholderText("Enter the actual token/webhook/URL value")
+        self.value_edit.setToolTip("The sensitive value to store securely")
+        form_layout.addRow("Value:", self.value_edit)
+        
+        self.description_edit = QTextEdit()
+        self.description_edit.setPlaceholderText("Optional description...")
+        self.description_edit.setMaximumHeight(80)
+        self.description_edit.setToolTip("Optional description for this credential")
+        form_layout.addRow("Description:", self.description_edit)
+        
+        layout.addLayout(form_layout)
+        
+        # Buttons
+        button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        button_box.button(QDialogButtonBox.Ok).setToolTip("Save this credential")
+        button_box.button(QDialogButtonBox.Cancel).setToolTip("Cancel without saving")
+        button_box.accepted.connect(self.accept_credential)
+        button_box.rejected.connect(self.reject)
+        layout.addWidget(button_box)
+    
+    def populate_fields(self, credential):
+        """Populate form fields with existing credential data"""
+        self.name_edit.setText(credential.name)
+        self.type_combo.setCurrentText(credential.type)
+        self.value_edit.setText(credential.value)
+        self.description_edit.setPlainText(credential.description)
+    
+    def accept_credential(self):
+        """Validate and accept credential"""
+        name = self.name_edit.text().strip()
+        if not name:
+            QMessageBox.warning(self, "Warning", "Credential name is required!")
+            return
+        
+        value = self.value_edit.text().strip()
+        if not value:
+            QMessageBox.warning(self, "Warning", "Credential value is required!")
+            return
+        
+        self.credential = Credential(
+            name=name,
+            type=self.type_combo.currentText(),
+            value=value,
+            description=self.description_edit.toPlainText().strip(),
+            created_at=self.editing_credential.created_at if self.editing_credential else ""
         )
         
         super().accept()
@@ -423,6 +860,13 @@ class DiscordBotLauncherGUI(QMainWindow):
         docs_action.triggered.connect(self.open_discordpy_docs)
         dev_menu.addAction(docs_action)
         
+        dev_menu.addSeparator()
+        
+        credentials_action = QAction('🔐 &Credentials Manager', self)
+        credentials_action.setShortcut('Ctrl+K')
+        credentials_action.triggered.connect(self.open_credentials_manager)
+        dev_menu.addAction(credentials_action)
+        
         # Help menu
         help_menu = menubar.addMenu('&Help')
         
@@ -522,6 +966,12 @@ class DiscordBotLauncherGUI(QMainWindow):
         self.dev_portal_btn.setStyleSheet("QPushButton { background-color: #5865F2; color: white; }")
         controls_layout.addWidget(self.dev_portal_btn)
         
+        self.credentials_btn = QPushButton("🔐 Credentials")
+        self.credentials_btn.clicked.connect(self.open_credentials_manager)
+        self.credentials_btn.setToolTip("Manage Discord tokens, webhooks, and API keys")
+        self.credentials_btn.setStyleSheet("QPushButton { background-color: #FF6B35; color: white; }")
+        controls_layout.addWidget(self.credentials_btn)
+        
         layout.addLayout(controls_layout)
         
         self.tab_widget.addTab(dashboard_widget, "🤖 Dashboard")
@@ -597,6 +1047,13 @@ class DiscordBotLauncherGUI(QMainWindow):
         docs_creator_btn.setToolTip("Open Discord.py documentation in your browser")
         docs_creator_btn.setStyleSheet("QPushButton { background-color: #5865F2; color: white; padding: 10px; }")
         dev_tools_layout.addWidget(docs_creator_btn)
+        
+        # Credentials Manager button
+        credentials_creator_btn = QPushButton("🔐 Credentials")
+        credentials_creator_btn.clicked.connect(self.open_credentials_manager)
+        credentials_creator_btn.setToolTip("Manage Discord tokens, webhooks, and API keys")
+        credentials_creator_btn.setStyleSheet("QPushButton { background-color: #FF6B35; color: white; padding: 10px; }")
+        dev_tools_layout.addWidget(credentials_creator_btn)
         
         dev_tools_group.setLayout(dev_tools_layout)
         layout.addWidget(dev_tools_group)
@@ -1394,6 +1851,15 @@ echo ""
         except Exception as e:
             QMessageBox.critical(self, "Error", 
                                f"Failed to open Discord.py documentation: {e}")
+    
+    def open_credentials_manager(self):
+        """Open the credentials manager dialog"""
+        try:
+            dialog = CredentialsManagerDialog(self)
+            dialog.exec_()
+        except Exception as e:
+            QMessageBox.critical(self, "Error", 
+                               f"Failed to open credentials manager: {e}")
     
     def show_about(self):
         """Show about dialog"""
