@@ -17,5 +17,46 @@ psutil>=5.9.0
 # HTTP Requests
 requests>=2.28.0
 
-# Optional: AI Agent Bridge (requires Ollama)
+# AI Agent Bridge (requires Ollama)
 ollama>=0.1.7
+
+# Enhanced Research Features - RAG System
+chromadb>=1.1.1
+sentence-transformers>=5.1.1
+PyPDF2>=3.0.1
+arxiv>=2.2.0
+scholarly>=1.7.11
+faiss-cpu>=1.12.0
+
+# Enhanced Research Features - GitHub Automation
+gitpython>=3.1.45
+
+# Enhanced Research Features - Scientific Computing
+numpy>=2.3.0
+scipy>=1.16.0
+scikit-learn>=1.7.0
+
+# Enhanced Research Features - Text Processing
+transformers>=4.57.0
+tokenizers>=0.22.0
+torch>=2.8.0
+
+# Enhanced Research Features - Data Management
+huggingface-hub>=0.35.0
+safetensors>=0.6.0
+
+# Terminal and Security
+rich>=14.2.0
+typer>=0.19.0
+
+# Configuration Management
+pyyaml>=6.0.3
+orjson>=3.11.3
+
+# Database and Storage
+tenacity>=9.1.2
+overrides>=7.7.0
+
+# Development and Debugging
+click>=8.3.0
+tqdm>=4.67.1
