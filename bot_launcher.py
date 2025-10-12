@@ -19,6 +19,7 @@ import subprocess
 import threading
 import time
 import logging
+import webbrowser
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Any
@@ -403,6 +404,25 @@ class DiscordBotLauncherGUI(QMainWindow):
         refresh_action.triggered.connect(self.refresh_bot_table)
         bots_menu.addAction(refresh_action)
         
+        # Developer Tools menu
+        dev_menu = menubar.addMenu('&Developer')
+        
+        discord_cli_action = QAction('Open Discord &CLI Terminal', self)
+        discord_cli_action.setShortcut('Ctrl+T')
+        discord_cli_action.triggered.connect(self.open_discord_cli_terminal)
+        dev_menu.addAction(discord_cli_action)
+        
+        dev_portal_action = QAction('Open Developer &Portal', self)
+        dev_portal_action.setShortcut('Ctrl+P')
+        dev_portal_action.triggered.connect(self.open_discord_developer_portal)
+        dev_menu.addAction(dev_portal_action)
+        
+        dev_menu.addSeparator()
+        
+        docs_action = QAction('Discord.py &Documentation', self)
+        docs_action.triggered.connect(self.open_discordpy_docs)
+        dev_menu.addAction(docs_action)
+        
         # Help menu
         help_menu = menubar.addMenu('&Help')
         
@@ -487,6 +507,21 @@ class DiscordBotLauncherGUI(QMainWindow):
         self.delete_btn.setToolTip("Permanently delete the selected bot and its configuration")
         controls_layout.addWidget(self.delete_btn)
         
+        controls_layout.addStretch()
+        
+        # Developer tools buttons
+        self.discord_cli_btn = QPushButton("💻 Discord CLI")
+        self.discord_cli_btn.clicked.connect(self.open_discord_cli_terminal)
+        self.discord_cli_btn.setToolTip("Open terminal with Discord CLI for bot management")
+        self.discord_cli_btn.setStyleSheet("QPushButton { background-color: #5865F2; color: white; }")
+        controls_layout.addWidget(self.discord_cli_btn)
+        
+        self.dev_portal_btn = QPushButton("🌐 Dev Portal")
+        self.dev_portal_btn.clicked.connect(self.open_discord_developer_portal)
+        self.dev_portal_btn.setToolTip("Open Discord Developer Portal in browser")
+        self.dev_portal_btn.setStyleSheet("QPushButton { background-color: #5865F2; color: white; }")
+        controls_layout.addWidget(self.dev_portal_btn)
+        
         layout.addLayout(controls_layout)
         
         self.tab_widget.addTab(dashboard_widget, "🤖 Dashboard")
@@ -538,9 +573,37 @@ class DiscordBotLauncherGUI(QMainWindow):
         templates_group.setLayout(templates_layout)
         layout.addWidget(templates_group)
         
+        # Developer Tools section
+        dev_tools_group = QGroupBox("🛠️ Developer Tools")
+        dev_tools_layout = QHBoxLayout()
+        
+        # Discord CLI button
+        discord_cli_creator_btn = QPushButton("💻 Discord CLI Terminal")
+        discord_cli_creator_btn.clicked.connect(self.open_discord_cli_terminal)
+        discord_cli_creator_btn.setToolTip("Open terminal with Discord development tools and CLI")
+        discord_cli_creator_btn.setStyleSheet("QPushButton { background-color: #5865F2; color: white; padding: 10px; }")
+        dev_tools_layout.addWidget(discord_cli_creator_btn)
+        
+        # Developer Portal button
+        dev_portal_creator_btn = QPushButton("🌐 Developer Portal")
+        dev_portal_creator_btn.clicked.connect(self.open_discord_developer_portal)
+        dev_portal_creator_btn.setToolTip("Open Discord Developer Portal in your browser")
+        dev_portal_creator_btn.setStyleSheet("QPushButton { background-color: #5865F2; color: white; padding: 10px; }")
+        dev_tools_layout.addWidget(dev_portal_creator_btn)
+        
+        # Discord.py Documentation button
+        docs_creator_btn = QPushButton("📚 Documentation")
+        docs_creator_btn.clicked.connect(self.open_discordpy_docs)
+        docs_creator_btn.setToolTip("Open Discord.py documentation in your browser")
+        docs_creator_btn.setStyleSheet("QPushButton { background-color: #5865F2; color: white; padding: 10px; }")
+        dev_tools_layout.addWidget(docs_creator_btn)
+        
+        dev_tools_group.setLayout(dev_tools_layout)
+        layout.addWidget(dev_tools_group)
+        
         layout.addStretch()
         
-        self.tab_widget.addTab(creator_widget, "🛠️ Creator")
+        self.tab_widget.addTab(creator_widget, "🛮️ Creator")
     
     def create_settings_tab(self):
         """Create the settings tab"""
@@ -1200,6 +1263,137 @@ if __name__ == '__main__':
         """View bot logs"""
         dialog = LogViewerDialog(self, self.log_file)
         dialog.exec_()
+    
+    def open_discord_cli_terminal(self):
+        """Open terminal with Discord CLI and development tools"""
+        try:
+            # Check for various Discord CLI tools
+            discord_cli_found = False
+            cli_command = None
+            
+            # Check for common Discord CLI tools
+            cli_tools = [
+                ('discord-cli', 'Discord official CLI'),
+                ('djs', 'Discord.js CLI'),
+                ('discord-py', 'Discord.py CLI'),
+                ('npm list -g @discord/cli', 'Discord CLI via npm')
+            ]
+            
+            for cli_name, description in cli_tools:
+                check_cli = subprocess.run(['which', cli_name.split()[0]], capture_output=True, text=True)
+                if check_cli.returncode == 0:
+                    discord_cli_found = True
+                    cli_command = cli_name
+                    break
+            
+            # Create a comprehensive terminal session script
+            welcome_message = '''echo "=== 🚀 Discord Bot Development Terminal ==="
+echo "Current Directory: $(pwd)"
+echo "Python: $(python3 --version 2>/dev/null || echo 'Not available')"
+echo "Node.js: $(node --version 2>/dev/null || echo 'Not available')"
+echo ""
+echo "📋 Available Commands:"
+echo "  • Python Discord.py: python3 -m discord --help (if installed)"
+echo "  • Discord.py docs: python3 -c 'import discord; help(discord)'"
+echo "  • Bot status: ps aux | grep python | grep -v grep"
+echo "  • Environment variables: env | grep DISCORD"
+echo ""
+if command -v discord-cli &> /dev/null; then
+    echo "  • Discord CLI: discord-cli --help"
+    discord-cli --version 2>/dev/null || echo "    (Available but may need setup)"
+fi
+if command -v djs &> /dev/null; then
+    echo "  • Discord.js CLI: djs --help"
+fi
+if command -v npm &> /dev/null; then
+    echo "  • NPM packages: npm list discord"
+fi
+echo ""
+echo "💡 Quick Setup:"
+echo "  • Install Discord.py: pip3 install discord.py"
+echo "  • Install Discord CLI: npm install -g @discord/cli"
+echo "  • Set token: export DISCORD_TOKEN='your_token_here'"
+echo ""
+echo "🌐 Useful URLs (use 'firefox URL' or 'google-chrome URL'):"
+echo "  • Developer Portal: https://discord.com/developers/applications"
+echo "  • Discord.py Docs: https://discordpy.readthedocs.io/"
+echo "  • Discord.js Docs: https://discord.js.org/"
+echo ""
+'''
+            
+            if discord_cli_found:
+                welcome_message += f'''echo "✅ Found Discord CLI: {cli_command}"
+{cli_command.split()[0]} --help 2>/dev/null || echo "Run '{cli_command}' for help"
+echo ""
+'''
+            else:
+                welcome_message += '''echo "⚠️  No Discord CLI found. Install options:"
+echo "  • npm install -g @discord/cli"
+echo "  • pip install discord-cli"
+echo ""
+'''
+            
+            # Get the default terminal emulator
+            terminal_commands = [
+                ['gnome-terminal', '--title=Discord Development Terminal', '--', 'bash', '-c', f'{welcome_message}bash'],
+                ['xterm', '-title', 'Discord Development Terminal', '-e', f'bash -c "{welcome_message}bash"'],
+                ['konsole', '--title', 'Discord Development Terminal', '-e', f'bash -c "{welcome_message}bash"'],
+                ['x-terminal-emulator', '-T', 'Discord Development Terminal', '-e', f'bash -c "{welcome_message}bash"'],
+                ['tilix', '--title=Discord Development Terminal', '-e', f'bash -c "{welcome_message}bash"'],
+                ['terminator', '--title=Discord Development Terminal', '-e', f'bash -c "{welcome_message}bash"']
+            ]
+            
+            # Try to open terminal
+            terminal_opened = False
+            for cmd in terminal_commands:
+                try:
+                    subprocess.Popen(cmd, cwd=self.workspace_dir)
+                    terminal_opened = True
+                    self.status_bar.showMessage("Discord CLI terminal opened")
+                    break
+                except (subprocess.CalledProcessError, FileNotFoundError):
+                    continue
+            
+            if not terminal_opened:
+                # Fallback: Create a comprehensive development session script
+                script_content = f'''#!/bin/bash
+{welcome_message}bash
+'''
+                
+                script_path = self.workspace_dir / "discord_dev_terminal.sh"
+                with open(script_path, 'w') as f:
+                    f.write(script_content)
+                
+                script_path.chmod(0o755)
+                
+                try:
+                    subprocess.Popen(['bash', str(script_path)], cwd=self.workspace_dir)
+                    self.status_bar.showMessage("Discord development terminal opened")
+                except Exception as e:
+                    QMessageBox.critical(self, "Error", 
+                                       f"Failed to open terminal: {e}\n\n"
+                                       f"Try running manually:\nbash {script_path}")
+                    
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to open Discord development terminal: {e}")
+    
+    def open_discord_developer_portal(self):
+        """Open Discord Developer Portal in browser"""
+        try:
+            webbrowser.open('https://discord.com/developers/applications')
+            self.status_bar.showMessage("Discord Developer Portal opened in browser")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", 
+                               f"Failed to open Discord Developer Portal: {e}")
+    
+    def open_discordpy_docs(self):
+        """Open Discord.py documentation"""
+        try:
+            webbrowser.open('https://discordpy.readthedocs.io/en/stable/')
+            self.status_bar.showMessage("Discord.py documentation opened in browser")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", 
+                               f"Failed to open Discord.py documentation: {e}")
     
     def show_about(self):
         """Show about dialog"""
