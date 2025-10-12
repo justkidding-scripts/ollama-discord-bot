@@ -637,15 +637,15 @@ class ResearchBot(commands.Bot):
     def init_research_db(self):
         conn = sqlite3.connect('research_data.db')
         cursor = conn.cursor()
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS research_notes (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER,
-                title TEXT,
-                content TEXT,
-                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        ''')
+        cursor.execute("""
+    CREATE TABLE IF NOT EXISTS research_notes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        title TEXT,
+        content TEXT,
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+        """)
         conn.commit()
         conn.close()
 
@@ -664,10 +664,10 @@ async def add_note(ctx, title: str, *, content: str):
     """Add a research note"""
     conn = sqlite3.connect('research_data.db')
     cursor = conn.cursor()
-    cursor.execute('''
-        INSERT INTO research_notes (user_id, title, content)
-        VALUES (?, ?, ?)
-    ''', (ctx.author.id, title, content))
+    cursor.execute("""
+    INSERT INTO research_notes (user_id, title, content)
+    VALUES (?, ?, ?)
+    """, (ctx.author.id, title, content))
     conn.commit()
     conn.close()
     
@@ -678,10 +678,10 @@ async def list_notes(ctx):
     """List research notes"""
     conn = sqlite3.connect('research_data.db')
     cursor = conn.cursor()
-    cursor.execute('''
-        SELECT title, timestamp FROM research_notes 
-        WHERE user_id = ? ORDER BY timestamp DESC LIMIT 10
-    ''', (ctx.author.id,))
+    cursor.execute("""
+    SELECT title, timestamp FROM research_notes 
+    WHERE user_id = ? ORDER BY timestamp DESC LIMIT 10
+    """, (ctx.author.id,))
     
     results = cursor.fetchall()
     conn.close()
@@ -699,10 +699,10 @@ async def search_notes(ctx, *, query: str):
     """Search research notes"""
     conn = sqlite3.connect('research_data.db')
     cursor = conn.cursor()
-    cursor.execute('''
-        SELECT title, content FROM research_notes 
-        WHERE user_id = ? AND (title LIKE ? OR content LIKE ?)
-    ''', (ctx.author.id, f"%{{query}}%", f"%{{query}}%"))
+    cursor.execute("""
+    SELECT title, content FROM research_notes 
+    WHERE user_id = ? AND (title LIKE ? OR content LIKE ?)
+    """, (ctx.author.id, f"%{{query}}%", f"%{{query}}%"))
     
     results = cursor.fetchall()
     conn.close()
