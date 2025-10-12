@@ -1,0 +1,99 @@
+# Environment and Secret Files
+.env
+*.env
+.env.backup*
+
+# Database Files
+*.db
+*.sqlite3
+clean_bot.db
+final_ultra_bot.db
+ultra_bot.db
+
+# Log Files
+*.log
+*.out
+clean_bot_output.log
+enhanced_*.log
+ultra_*.log
+final_*.log
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+*-env/
+discord-bot-env/
+ollama-bot-env/
+ultra-enhanced-env/
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
+nohup.out
+
+# Research Data (keep private)
+.research_sessions/
+rag_data/
+files/
+
+# Service Files (system specific)
+*.service
+
+# Deployment Scripts (contain secrets)
+deploy_*.sh
+manage_*.sh
+
+# Old/Backup Files (keep repo clean)
+*_backup.py
+*_v2.py
+*_v3.py
+streamlined_bot.py
+enhanced_discord_bot.py
+ultra_enhanced_*.py
+final_ultra_bot.py
+
+# Configuration Files (may contain secrets)
+config.py
+.github_automation.json
+
+# Invite Links (contain sensitive info)
+*invite*.txt
+*_invite*.py
+bot_invite_*.txt
+
+# Manual/Setup Files (keep repo focused)
+manual_*.py
+setup_*.py
+check_*.py
+test_*.py
+simple_*.py
+fix_*.py
+generate_*.py
+
+# Large files
+*.pdf
+*.zip
+*.tar.gz
+models/
+data/large_datasets/
+.env.local

@@ -1,0 +1,21 @@
+# Discord Bot Core
+discord.py>=2.3.2
+aiohttp>=3.8.0
+
+# Async Support
+aiofiles>=23.2.0
+
+# Scheduling and Tasks  
+APScheduler>=3.10.4
+
+# Environment Management
+python-dotenv>=1.0.0
+
+# System Monitoring
+psutil>=5.9.0
+
+# HTTP Requests
+requests>=2.28.0
+
+# Optional: AI Agent Bridge (requires Ollama)
+ollama>=0.1.7
