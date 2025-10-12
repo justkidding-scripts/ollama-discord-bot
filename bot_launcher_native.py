@@ -117,12 +117,10 @@ class BotCreatorDialog(QDialog):
         
         self.name_edit = QLineEdit()
         self.name_edit.setPlaceholderText("Enter bot name (required)")
-        self.name_edit.setToolTip("Enter a unique name for your bot (required)")
         form_layout.addRow("Bot Name:", self.name_edit)
         
         self.desc_edit = QLineEdit()
         self.desc_edit.setPlaceholderText("Bot description (optional)")
-        self.desc_edit.setToolTip("Brief description of what your bot does")
         form_layout.addRow("Description:", self.desc_edit)
         
         self.template_combo = QComboBox()
@@ -130,13 +128,11 @@ class BotCreatorDialog(QDialog):
             "basic", "research_assistant", "minimal", "clean_enhanced"
         ])
         self.template_combo.currentTextChanged.connect(self.update_preview)
-        self.template_combo.setToolTip("Select a bot template with pre-configured features and capabilities")
         form_layout.addRow("Template:", self.template_combo)
         
         self.port_spin = QSpinBox()
         self.port_spin.setRange(1000, 65535)
         self.port_spin.setValue(8080)
-        self.port_spin.setToolTip("Port number for the bot (if applicable)")
         form_layout.addRow("Port:", self.port_spin)
         
         form_group.setLayout(form_layout)
@@ -158,8 +154,6 @@ class BotCreatorDialog(QDialog):
         button_box = QDialogButtonBox(
             QDialogButtonBox.Ok | QDialogButtonBox.Cancel
         )
-        button_box.button(QDialogButtonBox.Ok).setToolTip("Create a new bot with the specified configuration")
-        button_box.button(QDialogButtonBox.Cancel).setToolTip("Cancel bot creation and return to dashboard")
         button_box.accepted.connect(self.accept)
         button_box.rejected.connect(self.reject)
         layout.addWidget(button_box)
@@ -215,12 +209,10 @@ class LogViewerDialog(QDialog):
         
         refresh_btn = QPushButton("Refresh")
         refresh_btn.clicked.connect(self.load_logs)
-        refresh_btn.setToolTip("Reload the log file to show latest entries")
         controls_layout.addWidget(refresh_btn)
         
         clear_btn = QPushButton("Clear")
         clear_btn.clicked.connect(self.clear_logs)
-        clear_btn.setToolTip("Clear the displayed log content")
         controls_layout.addWidget(clear_btn)
         
         controls_layout.addStretch()
@@ -235,7 +227,6 @@ class LogViewerDialog(QDialog):
         # Close button
         close_btn = QPushButton("Close")
         close_btn.clicked.connect(self.accept)
-        close_btn.setToolTip("Close the log viewer and return to dashboard")
         layout.addWidget(close_btn)
     
     def load_logs(self):
@@ -420,24 +411,20 @@ class DiscordBotLauncherGUI(QMainWindow):
         
         self.create_btn = QPushButton("📱 Create New Bot")
         self.create_btn.clicked.connect(self.create_new_bot)
-        self.create_btn.setToolTip("Create a new Discord bot from available templates")
         buttons_layout.addWidget(self.create_btn)
         
         self.refresh_btn = QPushButton("🔄 Refresh")
         self.refresh_btn.clicked.connect(self.refresh_bot_table)
-        self.refresh_btn.setToolTip("Refresh the bot list and status information")
         buttons_layout.addWidget(self.refresh_btn)
         
         buttons_layout.addStretch()
         
         self.start_all_btn = QPushButton("▶️ Start All")
         self.start_all_btn.clicked.connect(self.start_all_bots)
-        self.start_all_btn.setToolTip("Start all configured bots at once")
         buttons_layout.addWidget(self.start_all_btn)
         
         self.stop_all_btn = QPushButton("⏹️ Stop All")
         self.stop_all_btn.clicked.connect(self.stop_all_bots)
-        self.stop_all_btn.setToolTip("Stop all running bots at once")
         buttons_layout.addWidget(self.stop_all_btn)
         
         layout.addLayout(buttons_layout)
@@ -448,7 +435,6 @@ class DiscordBotLauncherGUI(QMainWindow):
         self.bot_table.setHorizontalHeaderLabels([
             "Name", "Status", "PID", "Port", "Created", "Actions"
         ])
-        self.bot_table.setToolTip("Select a bot to view details and perform actions")
         
         # Make table look better
         self.bot_table.horizontalHeader().setStretchLastSection(True)
@@ -462,29 +448,24 @@ class DiscordBotLauncherGUI(QMainWindow):
         
         self.start_btn = QPushButton("▶️ Start")
         self.start_btn.clicked.connect(self.start_selected_bot)
-        self.start_btn.setToolTip("Start the selected bot instance")
         controls_layout.addWidget(self.start_btn)
         
         self.stop_btn = QPushButton("⏹️ Stop")
         self.stop_btn.clicked.connect(self.stop_selected_bot)
-        self.stop_btn.setToolTip("Stop the selected running bot")
         controls_layout.addWidget(self.stop_btn)
         
         self.restart_btn = QPushButton("🔄 Restart")
         self.restart_btn.clicked.connect(self.restart_selected_bot)
-        self.restart_btn.setToolTip("Restart the selected bot (stop then start)")
         controls_layout.addWidget(self.restart_btn)
         
         controls_layout.addStretch()
         
         self.logs_btn = QPushButton("📊 View Logs")
         self.logs_btn.clicked.connect(self.view_bot_logs)
-        self.logs_btn.setToolTip("View the log output from the selected bot")
         controls_layout.addWidget(self.logs_btn)
         
         self.delete_btn = QPushButton("🗑️ Delete")
         self.delete_btn.clicked.connect(self.delete_selected_bot)
-        self.delete_btn.setToolTip("Permanently delete the selected bot and its configuration")
         controls_layout.addWidget(self.delete_btn)
         
         layout.addLayout(controls_layout)
@@ -503,10 +484,9 @@ class DiscordBotLauncherGUI(QMainWindow):
         layout.addWidget(info_label)
         
         # Create button
-        create_new_btn = QPushButton("🛮️ Create New Bot")
+        create_new_btn = QPushButton("🛠️ Create New Bot")
         create_new_btn.setMinimumHeight(50)
         create_new_btn.clicked.connect(self.create_new_bot)
-        create_new_btn.setToolTip("Open the bot creation wizard to create a new Discord bot")
         layout.addWidget(create_new_btn)
         
         # Templates info
@@ -554,11 +534,9 @@ class DiscordBotLauncherGUI(QMainWindow):
         self.theme_combo = QComboBox()
         self.theme_combo.addItems(["Dark", "Light"])
         self.theme_combo.currentTextChanged.connect(self.change_theme)
-        self.theme_combo.setToolTip("Switch between dark and light theme")
         general_layout.addRow("Theme:", self.theme_combo)
         
         self.auto_start_check = QCheckBox("Auto-start bots on launch")
-        self.auto_start_check.setToolTip("Automatically start all bots when the launcher starts")
         general_layout.addRow(self.auto_start_check)
         
         general_group.setLayout(general_layout)

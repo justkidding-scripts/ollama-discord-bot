@@ -85,7 +85,7 @@ install_dependencies() {
 
 # Function to launch GUI mode
 launch_gui() {
-    print_header "🎛️ Launching GUI Bot Management System..."
+    print_header "🎛️ Launching Native GUI Bot Management System..."
     
     # Check if GUI is available
     if ! check_gui; then
@@ -93,7 +93,13 @@ launch_gui() {
         return 1
     fi
     
-    # Launch the GUI application
+    # Check PyQt5 availability
+    if ! python3 -c "from PyQt5.QtWidgets import QApplication" 2>/dev/null; then
+        print_colored "⚠️  PyQt5 not available, installing..." $YELLOW
+        pip install PyQt5
+    fi
+    
+    # Launch the native GUI application
     python bot_launcher.py
 }
 
