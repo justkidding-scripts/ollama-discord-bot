@@ -1,23 +1,23 @@
-# 🤖 Multi-Agent Discord Bot
+# Multi-Agent Discord Bot
 
 **A powerful Discord bot with 10 specialized AI agents powered by Ollama**
 
-## ✨ Features
+## Features
 
-- 🤖 **10 Specialized Agents** - Development, creative, business, education & support
-- 🔗 **Agent Chaining** - Combine multiple agents for complex workflows  
-- 🔍 **Multi-Agent Analysis** - Collaborative research and problem-solving
-- 🏠 **Local AI** - Privacy-preserving with Ollama (no external API calls)
-- ⚡ **Fast & Reliable** - Built-in rate limiting and error handling
-- 📊 **Rich Discord Integration** - Embeds, reactions, typing indicators
+- **10 Specialized Agents** - Development, creative, business, education & support
+- **Agent Chaining** - Combine multiple agents for complex workflows
+- **Multi-Agent Analysis** - Collaborative research and problem-solving
+- **Local AI** - Privacy-preserving with Ollama (no external API calls)
+- **Fast & Reliable** - Built-in rate limiting and error handling
+- **Rich Discord Integration** - Embeds, reactions, typing indicators
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Prerequisites
 ```bash
 # Ensure Ollama is running
 systemctl --user status ollama
-ollama list  # Should show llama3.2:3b
+ollama list # Should show llama3.2:3b
 ```
 
 ### 2. Configure Discord Token
@@ -43,7 +43,7 @@ Invite your bot to Discord and try:
 !agents
 ```
 
-## 🎮 Commands
+## Commands
 
 ### Core Commands
 - `!help` - Show all available commands
@@ -54,27 +54,27 @@ Invite your bot to Discord and try:
 - `!system` - Check bot status and statistics
 - `!models` - Show available AI models
 
-## 🤖 Available Agents
+## Available Agents
 
-### 💻 Development
+### Development
 - **python-developer** - Python programming, web development, scripting
-- **web-developer** - HTML, CSS, JavaScript, responsive design  
+- **web-developer** - HTML, CSS, JavaScript, responsive design
 - **backend-developer** - APIs, databases, server architecture
 
-### 🎨 Creative & Content
+### Creative & Content
 - **content-writer** - Writing, editing, content creation, storytelling
 - **designer** - UI/UX design, graphics, visual concepts
 
-### 📈 Business & Planning
+### Business & Planning
 - **business-advisor** - Strategy, planning, market analysis
 - **project-manager** - Project planning, coordination, workflow optimization
 
-### 🎓 Education & Support  
+### Education & Support
 - **tutor** - Education, explanations, skill development
 - **general-assistant** - General questions, everyday tasks, problem solving
 - **tech-helper** - Technical troubleshooting, software help, IT support
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### Basic Agent Queries
 ```
@@ -99,25 +99,25 @@ Invite your bot to Discord and try:
 !research effective team management strategies
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables (.env)
 ```bash
 # Discord Configuration
 DISCORD_TOKEN=your_discord_bot_token_here
-OLLAMA_HOST=http://localhost:11434
+OLLAMA_HOST=http/localhost:11434
 DEFAULT_MODEL=llama3.2:3b
 
 # Rate Limiting
-RATE_LIMIT_PER_USER=8          # Requests per minute
-RATE_LIMIT_WINDOW=60           # Rate limit window in seconds
+RATE_LIMIT_PER_USER=8 # Requests per minute
+RATE_LIMIT_WINDOW=60 # Rate limit window in seconds
 
 # Advanced Settings
-MAX_MESSAGE_LENGTH=1900        # Max Discord message length
-RESEARCH_COOLDOWN=30           # Cooldown for research command
-CHAIN_COOLDOWN=15              # Cooldown for chain command
-AGENT_TIMEOUT=120              # Max seconds per agent query
-LOG_LEVEL=INFO                 # Logging level
+MAX_MESSAGE_LENGTH=1900 # Max Discord message length
+RESEARCH_COOLDOWN=30 # Cooldown for research command
+CHAIN_COOLDOWN=15 # Cooldown for chain command
+AGENT_TIMEOUT=120 # Max seconds per agent query
+LOG_LEVEL=INFO # Logging level
 ```
 
 ### System Requirements
@@ -126,7 +126,7 @@ LOG_LEVEL=INFO                 # Logging level
 - **Storage**: 5GB+ for models and logs
 - **Network**: Stable internet for Discord connectivity
 
-## 📊 Monitoring & Logs
+## Monitoring & Logs
 
 ### Service Management
 ```bash
@@ -145,7 +145,7 @@ sudo systemctl restart enhanced-discord-bot
 - **System logs**: `journalctl -u enhanced-discord-bot`
 - **Ollama logs**: `journalctl -u ollama --user`
 
-## 🛠️ Troubleshooting
+## ️ Troubleshooting
 
 ### Bot Won't Start
 1. Check Discord token in `.env` file
@@ -162,18 +162,18 @@ sudo systemctl restart enhanced-discord-bot
 2. Adjust rate limits in `.env` file
 3. Check log files for errors
 
-## 🚀 Development
+## Development
 
 ### Project Structure
 ```
 ollama-discord-bot/
-├── enhanced_discord_bot_v2.py      # Main Discord bot
-├── ollama-agent-bridge.py          # Agent bridge system
-├── deploy_enhanced_bot.sh          # Deployment script
-├── .env                            # Configuration
-├── discord-bot-env/                # Python virtual environment
-├── enhanced-discord-bot.service    # Systemd service file
-└── logs/                          # Log files
+├── enhanced_discord_bot_v2.py # Main Discord bot
+├── ollama-agent-bridge.py # Agent bridge system
+├── deploy_enhanced_bot.sh # Deployment script
+├── .env # Configuration
+├── discord-bot-env/ # Python virtual environment
+├── enhanced-discord-bot.service # Systemd service file
+└── logs/ # Log files
 ```
 
 ### Adding New Agents
@@ -188,7 +188,7 @@ ollama-discord-bot/
 - Integrate with external APIs
 - Add database persistence
 
-## 🔐 Security
+## Security
 
 - **Local Processing** - All AI runs locally via Ollama
 - **Rate Limiting** - Prevents spam and abuse
@@ -196,14 +196,14 @@ ollama-discord-bot/
 - **Error Handling** - Graceful failure recovery
 - **Secure Configuration** - Environment variables for secrets
 
-## 📈 Performance Tips
+## Performance Tips
 
 1. **Optimize Rate Limits** - Adjust based on server size
 2. **Monitor Resources** - Keep an eye on CPU and memory usage
 3. **Use Agent Chains Wisely** - For complex multi-step problems
 4. **Regular Updates** - Keep Ollama and dependencies current
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -211,14 +211,14 @@ ollama-discord-bot/
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**🎉 Your multi-agent Discord bot is ready!**
+** Your multi-agent Discord bot is ready!**
 
 Perfect for developers, content creators, businesses, and anyone who needs AI assistance directly in Discord. The local Ollama integration ensures privacy while providing powerful AI capabilities through specialized agents.
 
-*Built with ❤️ using Ollama, Discord.py, and Python*
+*Built with ️ using Ollama, Discord.py, and Python*

@@ -1,8 +1,8 @@
-# 🎯 Complete Multi-Agent Discord Bot Setup Guide
+# Complete Multi-Agent Discord Bot Setup Guide
 
-## 🚀 Your Ollama Discord Bot is Ready!
+## Your Ollama Discord Bot is Ready!
 
-**Status**: ✅ All systems operational
+**Status**: All systems operational
 - **Ollama Service**: Running with llama3.2:3b model
 - **Agent Bridge**: 10 specialized agents loaded
 - **Virtual Environment**: Discord dependencies installed
@@ -10,10 +10,10 @@
 
 ---
 
-## 📋 Quick Start (5 Minutes)
+## Quick Start (5 Minutes)
 
 ### Step 1: Get Your Discord Bot Token
-1. Go to https://discord.com/developers/applications
+1. Go to https/discord.com/developers/applications
 2. Click "New Application" → Give it a name
 3. Go to "Bot" tab → Click "Add Bot"
 4. Copy the bot token (keep it secret!)
@@ -41,33 +41,33 @@ DISCORD_TOKEN=your_actual_discord_bot_token_here
 ./deploy_enhanced_bot.sh
 ```
 
-**That's it!** Your PhD-level research assistant is ready.
+**That's it!** Your -level research assistant is ready.
 
 ---
 
-## 🤖 Agent Capabilities
+## Agent Capabilities
 
-### 💻 Development Specialists
+### Development Specialists
 - **python-developer**: Python programming, web development, scripting
 - **web-developer**: HTML, CSS, JavaScript, responsive design
 - **backend-developer**: APIs, databases, server architecture
 
-### 🎨 Creative & Content
+### Creative & Content
 - **content-writer**: Writing, editing, content creation, storytelling
 - **designer**: UI/UX design, graphics, visual concepts
 
-### 📈 Business & Planning
+### Business & Planning
 - **business-advisor**: Strategy, planning, market analysis
 - **project-manager**: Project planning, team coordination, workflow optimization
 
-### 🎓 Education & Support
+### Education & Support
 - **tutor**: Education, explanations, skill development
 - **general-assistant**: General questions, everyday tasks, problem solving
 - **tech-helper**: Technical troubleshooting, software help, IT support
 
 ---
 
-## 🎮 Bot Commands
+## Bot Commands
 
 ### Basic Agent Chat
 ```
@@ -92,41 +92,41 @@ DISCORD_TOKEN=your_actual_discord_bot_token_here
 
 ### System Management
 ```
-!help          # Show all commands
-!agents         # List available specialists  
-!system         # Check system status
-!models         # Available AI models
+!help # Show all commands
+!agents # List available specialists
+!system # Check system status
+!models # Available AI models
 ```
 
 ---
 
-## ⚡ Advanced Features
+## Advanced Features
 
-### 🤖 Multi-Agent Collaboration
+### Multi-Agent Collaboration
 Powerful AI assistance with:
 - **Diverse perspectives**: Different agents provide specialized viewpoints
 - **Chain reasoning**: Complex problems broken down across specialists
 - **Comprehensive analysis**: In-depth and thorough responses
 - **Collaborative workflows**: Multiple agents working together
 
-### 🛡️ Security & Privacy
+### ️ Security & Privacy
 - **Local AI processing**: No external API calls
 - **Rate limiting**: Prevents abuse
 - **Error handling**: Robust failure recovery
 - **Logging**: Comprehensive activity monitoring
 
-### 🔧 Customization Options
+### Customization Options
 Edit `.env` file to adjust:
 ```env
-RATE_LIMIT_PER_USER=8     # Requests per minute
-RESEARCH_COOLDOWN=30      # Seconds between research sessions
-CHAIN_COOLDOWN=15         # Seconds between chain workflows
-AGENT_TIMEOUT=120         # Max seconds per agent query
+RATE_LIMIT_PER_USER=8 # Requests per minute
+RESEARCH_COOLDOWN=30 # Seconds between research sessions
+CHAIN_COOLDOWN=15 # Seconds between chain workflows
+AGENT_TIMEOUT=120 # Max seconds per agent query
 ```
 
 ---
 
-## 📊 Performance & Monitoring
+## Performance & Monitoring
 
 ### System Requirements
 - **RAM**: 4GB+ (8GB recommended for research mode)
@@ -154,7 +154,7 @@ ollama ps
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Bot Won't Start
 1. **Check Discord token**: Ensure `.env` has correct token
@@ -178,7 +178,7 @@ ollama ps
 
 ---
 
-## 🎯 PhD Research Use Cases
+## Research Use Cases
 
 ### Cybersecurity Research
 ```
@@ -187,7 +187,7 @@ ollama ps
 !agent backend-security-coder secure coding practices for IoT devices
 ```
 
-### Criminology Studies  
+### Criminology Studies
 ```
 !research digital forensics techniques for cryptocurrency investigations
 !chain data-scientist,business-analyst cryptocurrency money laundering patterns
@@ -196,14 +196,14 @@ ollama ps
 
 ### AI/ML Research
 ```
-!research ethical implications of AI in criminal justice
+!research implications of AI in criminal justice
 !chain ai-engineer,data-scientist,risk-manager bias detection in ML models
 !agent prompt-engineer optimization strategies for legal document analysis
 ```
 
 ---
 
-## 🚀 Production Deployment
+## Production Deployment
 
 ### Systemd Service Management
 ```bash
@@ -232,29 +232,29 @@ ollama list > models_backup.txt
 
 ### Security Considerations
 1. **Secure Discord token** - Use environment variables
-2. **Limit bot permissions** - Only grant necessary Discord permissions  
+2. **Limit bot permissions** - Only grant necessary Discord permissions
 3. **Monitor usage** - Review logs regularly
 4. **Update dependencies** - Keep Python packages current
 5. **Network security** - Consider firewall rules for Ollama port
 
 ---
 
-## 🎉 Success! Your Enhanced Discord Bot Features:
+## Success! Your Enhanced Discord Bot Features:
 
-✅ **84 Specialized AI Agents** - PhD-level expertise across domains  
-✅ **Multi-Agent Workflows** - Chain agents for complex analysis  
-✅ **Autonomous Research** - Independent multi-agent research sessions  
-✅ **Local AI Processing** - Privacy-preserving with Ollama  
-✅ **Rate Limiting** - Prevents abuse and ensures stability  
-✅ **Rich Discord Integration** - Embeds, reactions, and typing indicators  
-✅ **Comprehensive Logging** - Full activity monitoring and debugging  
-✅ **Systemd Service** - Production-ready deployment  
-✅ **Academic Focus** - Built specifically for PhD research workflows
+ **84 Specialized AI Agents** - -level expertise across domains
+ **Multi-Agent Workflows** - Chain agents for complex analysis
+ **Autonomous Research** - Independent multi-agent research sessions
+ **Local AI Processing** - Privacy-preserving with Ollama
+ **Rate Limiting** - Prevents abuse and ensures stability
+ **Rich Discord Integration** - Embeds, reactions, and typing indicators
+ **Comprehensive Logging** - Full activity monitoring and debugging
+ **Systemd Service** - Production-ready deployment
+ **Academic Focus** - Built specifically for research workflows
 
-## 🔮 10 Cool Enhancements You Could Add:
+## 10 Cool Enhancements You Could Add:
 
 1. **Voice Integration** - Add speech-to-text for voice queries
-2. **Document Analysis** - Upload PDFs for AI analysis  
+2. **Document Analysis** - Upload PDFs for AI analysis
 3. **Citation Generator** - Auto-format academic citations
 4. **Research Scheduler** - Timed research sessions and reminders
 5. **Collaborative Workflows** - Multi-user research projects
@@ -262,11 +262,11 @@ ollama list > models_backup.txt
 7. **Visualization Tools** - Generate charts and graphs from analysis
 8. **Academic Database Integration** - Connect to research databases
 9. **Peer Review Mode** - Multi-agent paper review system
-10. **Ethics Checker** - Automated research ethics validation
+10. ** Checker** - Automated research validation
 
-**Ready to enhance your PhD research? Your advanced AI assistant awaits!** 🧠✨
+**Ready to enhance your research? Your advanced AI assistant awaits!**
 
 ---
 
-*Built with ❤️ for cybersecurity and criminology PhD researchers*
+*Built with ️ for cybersecurity and criminology researchers*
 *Powered by Ollama, Discord.py, and 84 specialized AI agents*

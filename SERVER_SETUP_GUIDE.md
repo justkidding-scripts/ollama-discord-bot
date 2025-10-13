@@ -9,17 +9,17 @@
 
 ### Option 1: Basic Bot Permissions
 ```
-https://discord.com/oauth2/authorize?client_id=1426760267651350580&scope=bot&permissions=2148002880
+https/discord.com/oauth2/authorize?client_id=1426760267651350580&scope=bot&permissions=2148002880
 ```
 
 ### Option 2: Minimal Permissions
 ```
-https://discord.com/oauth2/authorize?client_id=1426760267651350580&scope=bot&permissions=68608
+https/discord.com/oauth2/authorize?client_id=1426760267651350580&scope=bot&permissions=68608
 ```
 
 ### Option 3: Simple Bot Scope Only
 ```
-https://discord.com/oauth2/authorize?client_id=1426760267651350580&scope=bot
+https/discord.com/oauth2/authorize?client_id=1426760267651350580&scope=bot
 ```
 
 ## Step-by-Step Server Addition
@@ -31,7 +31,7 @@ https://discord.com/oauth2/authorize?client_id=1426760267651350580&scope=bot
 4. Review permissions and click "Authorize"
 
 ### Method 2: Discord Developer Portal
-1. Go to https://discord.com/developers/applications/1426760267651350580/oauth2/url-generator
+1. Go to https/discord.com/developers/applications/1426760267651350580/oauth2/url-generator
 2. Select scopes: `bot`
 3. Select permissions you want (or leave default)
 4. Copy generated URL and use it
@@ -73,7 +73,7 @@ https://discord.com/oauth2/authorize?client_id=1426760267651350580&scope=bot
 
 Once added, test with these commands:
 - `!ping` - Basic connectivity test
-- `!test` - Functionality test  
+- `!test` - Functionality test
 - `!info` - Bot information
 
 ## Current Bot Status

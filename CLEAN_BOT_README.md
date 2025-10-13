@@ -1,12 +1,12 @@
-# Clean Enhanced Discord Bot - PhD Research Assistant
+# Clean Enhanced Discord Bot - Research Assistant
 
-🎓 **Academic Research-Focused Discord Bot** (Cybersecurity/hacking features removed)
+ **Academic Research-Focused Discord Bot** (Cybersecurity/hacking features removed)
 
 ## Current Status
-✅ **RUNNING** - Process ID: 893383  
-✅ **Features**: Terminal, Webhooks, Agents  
-✅ **Database**: SQLite logging enabled  
-✅ **Webhook Server**: Port 8085  
+ **RUNNING** - Process ID: 893383
+ **Features**: Terminal, Webhooks, Agents
+ **Database**: SQLite logging enabled
+ **Webhook Server**: Port 8085
 
 ## Available Slash Commands
 
@@ -37,7 +37,7 @@ Show bot performance and system information
 
 ## Clean Features (No Cybersecurity)
 
-### ✅ What's Included:
+### What's Included:
 - **Secure Terminal**: Basic file operations, development tools
 - **AI Agent Integration**: Chat with Ollama models
 - **Webhook Server**: Research data integration
@@ -46,7 +46,7 @@ Show bot performance and system information
 - **Scheduled Tasks**: Automatic cleanup and maintenance
 - **Rate Limiting**: Prevent spam and abuse
 
-### ❌ What's Removed:
+### What's Removed:
 - All network scanning tools (nmap, netstat, ss)
 - Security testing frameworks (Metasploit, Burp Suite)
 - Password cracking tools (hashcat, john)
@@ -61,12 +61,12 @@ Show bot performance and system information
 
 ```
 /home/nike/ollama-discord-bot/
-├── clean_enhanced_bot.py          # Main clean bot file
-├── clean_enhanced_bot.log         # Bot runtime logs
-├── clean_bot_output.log          # Background process output
-├── clean_bot.db                   # SQLite database
-├── .env                          # Environment configuration
-└── CLEAN_BOT_README.md           # This documentation
+├── clean_enhanced_bot.py # Main clean bot file
+├── clean_enhanced_bot.log # Bot runtime logs
+├── clean_bot_output.log # Background process output
+├── clean_bot.db # SQLite database
+├── .env # Environment configuration
+└── CLEAN_BOT_README.md # This documentation
 ```
 
 ## Configuration
@@ -81,27 +81,27 @@ DEBUG_MODE=true
 ```
 
 ### Webhook Endpoints
-- **Research Data**: `POST http://localhost:8085/webhook/research`
-- **Status Check**: `GET http://localhost:8085/webhook/status`
+- **Research Data**: `POST http/localhost:8085/webhook/research`
+- **Status Check**: `GET http/localhost:8085/webhook/status`
 
 ### Authentication
 ```bash
-curl -X POST http://localhost:8085/webhook/research \
-  -H "Authorization: Bearer research_webhook_secret" \
-  -H "Content-Type: application/json" \
-  -d '{"channel_id": "123456789", "message": "Research update"}'
+curl -X POST http/localhost:8085/webhook/research \
+ -H "Authorization: Bearer research_webhook_secret" \
+ -H "Content-Type: application/json" \
+ -d '{"channel_id": "123456789", "message": "Research update"}'
 ```
 
 ## Usage Examples
 
 ### Academic Research Workflow
 ```
-1. /terminal                    # Create secure session
-2. /term git clone https://... # Clone research repository
-3. /term ls -la                # Explore files
-4. /term python3 analysis.py   # Run analysis scripts
-5. /agent research "explain results"  # Get AI insights
-6. /debug                      # Check system performance
+1. /terminal # Create secure session
+2. /term git clone https/... # Clone research repository
+3. /term ls -la # Explore files
+4. /term python3 analysis.py # Run analysis scripts
+5. /agent research "explain results" # Get AI insights
+6. /debug # Check system performance
 ```
 
 ### Safe Development Tasks
@@ -173,9 +173,9 @@ SELECT * FROM command_history LIMIT 10;
 Send research updates directly to Discord channels:
 ```json
 {
-  "channel_id": "your_channel_id",
-  "message": "Data analysis complete",
-  "details": "Found 95% accuracy in model predictions"
+ "channel_id": "your_channel_id",
+ "message": "Data analysis complete",
+ "details": "Found 95% accuracy in model predictions"
 }
 ```
 
@@ -209,19 +209,19 @@ tail -f clean_enhanced_bot.log
 ### Database Queries
 ```sql
 -- Most used commands
-SELECT command, COUNT(*) as usage FROM command_history 
+SELECT command, COUNT(*) as usage FROM command_history
 GROUP BY command ORDER BY usage DESC LIMIT 10;
 
 -- User activity
-SELECT user_id, COUNT(*) as commands, MAX(timestamp) as last_seen 
+SELECT user_id, COUNT(*) as commands, MAX(timestamp) as last_seen
 FROM command_history GROUP BY user_id;
 
 -- Error rate
-SELECT 
-  DATE(timestamp) as date,
-  COUNT(*) as total_commands,
-  SUM(CASE WHEN success = 0 THEN 1 ELSE 0 END) as errors
-FROM command_history 
+SELECT
+ DATE(timestamp) as date,
+ COUNT(*) as total_commands,
+ SUM(CASE WHEN success = 0 THEN 1 ELSE 0 END) as errors
+FROM command_history
 GROUP BY DATE(timestamp);
 ```
 
@@ -238,4 +238,4 @@ Access via `/debug` command or check the database directly.
 
 ---
 
-🔬 **Clean PhD Research Bot** - Academic-focused, security tools removed, safe for educational environments.
+ **Clean Research Bot** - Academic-focused, security tools removed, safe for educational environments.

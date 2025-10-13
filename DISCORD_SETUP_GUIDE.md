@@ -1,9 +1,9 @@
-# 🤖 Discord Bot Setup & Invitation Guide
+# Discord Bot Setup & Invitation Guide
 
 ## Step 1: Create Discord Application & Bot
 
 ### 1.1 Go to Discord Developer Portal
-1. Open your browser and go to: **https://discord.com/developers/applications**
+1. Open your browser and go to: **https/discord.com/developers/applications**
 2. Click **"New Application"**
 3. Give your application a name (e.g., "Multi-Agent AI Bot")
 4. Click **"Create"**
@@ -16,16 +16,16 @@
 
 ### 1.3 Configure Bot Settings
 1. **Privileged Gateway Intents** (IMPORTANT):
-   - ✅ Enable **"Message Content Intent"**
-   - ✅ Enable **"Server Members Intent"** (optional)
-   - ✅ Enable **"Presence Intent"** (optional)
+ - Enable **"Message Content Intent"**
+ - Enable **"Server Members Intent"** (optional)
+ - Enable **"Presence Intent"** (optional)
 
 2. **Bot Permissions** (we'll set these in OAuth2):
-   - Send Messages
-   - Read Message History
-   - Use Slash Commands
-   - Add Reactions
-   - Embed Links
+ - Send Messages
+ - Read Message History
+ - Use Slash Commands
+ - Add Reactions
+ - Embed Links
 
 ## Step 2: Configure Your Bot Project
 
@@ -38,7 +38,7 @@ nano .env
 DISCORD_TOKEN=your_actual_discord_bot_token_here
 ```
 
-**⚠️ NEVER share your bot token publicly!**
+**️ NEVER share your bot token publicly!**
 
 ### 2.2 Verify System Status
 ```bash
@@ -55,23 +55,23 @@ python3 ollama-agent-bridge.py --status
 ### 3.1 OAuth2 URL Generator
 1. In Discord Developer Portal, go to **"OAuth2"** → **"URL Generator"**
 2. **Scopes**: Select these checkboxes:
-   - ✅ `bot`
-   - ✅ `applications.commands`
+ - `bot`
+ - `applications.commands`
 
 3. **Bot Permissions**: Select these checkboxes:
-   - ✅ Send Messages
-   - ✅ Send Messages in Threads  
-   - ✅ Read Message History
-   - ✅ Use Slash Commands
-   - ✅ Add Reactions
-   - ✅ Embed Links
-   - ✅ Attach Files
-   - ✅ Use External Emojis
+ - Send Messages
+ - Send Messages in Threads
+ - Read Message History
+ - Use Slash Commands
+ - Add Reactions
+ - Embed Links
+ - Attach Files
+ - Use External Emojis
 
 ### 3.2 Generated URL
 Copy the **Generated URL** at the bottom of the page. It should look like:
 ```
-https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=277025902592&scope=bot%20applications.commands
+https/discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=277025902592&scope=bot%20applications.commands
 ```
 
 ## Step 4: Invite Bot to Your Server
@@ -110,26 +110,26 @@ Once deployed, test in Discord:
 !system
 ```
 
-## 🎯 Quick Reference
+## Quick Reference
 
 ### Essential Discord Developer Settings
 - **Application Name**: Your bot's name
 - **Bot Token**: Keep secret, add to .env file
-- **Message Content Intent**: ✅ MUST be enabled
+- **Message Content Intent**: MUST be enabled
 - **Permissions**: Send Messages, Read History, Slash Commands
 
 ### Bot Invite URL Template
 ```
-https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=277025902592&scope=bot%20applications.commands
+https/discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=277025902592&scope=bot%20applications.commands
 ```
 
 ### Required Files Check
 ```bash
 # Verify these files exist and are configured:
-ls -la .env                           # Contains DISCORD_TOKEN
-ls -la enhanced_discord_bot_v2.py     # Main bot file
-ls -la ollama-agent-bridge.py         # Agent system
-ls -la deploy_enhanced_bot.sh         # Deployment script
+ls -la .env # Contains DISCORD_TOKEN
+ls -la enhanced_discord_bot_v2.py # Main bot file
+ls -la ollama-agent-bridge.py # Agent system
+ls -la deploy_enhanced_bot.sh # Deployment script
 ```
 
 ### Testing Commands
@@ -142,7 +142,7 @@ source discord-bot-env/bin/activate
 timeout 10 python3 enhanced_discord_bot_v2.py
 ```
 
-## 🛠️ Troubleshooting
+## ️ Troubleshooting
 
 ### Bot Token Issues
 - **Invalid token**: Regenerate token in Developer Portal
@@ -164,19 +164,19 @@ timeout 10 python3 enhanced_discord_bot_v2.py
 - **Missing permissions**: Check bot role permissions in server
 - **Incorrect prefix**: Commands start with `!` (exclamation mark)
 
-## 🎉 Success Checklist
+## Success Checklist
 
-- ✅ Discord application created
-- ✅ Bot user created and token copied
-- ✅ Message Content Intent enabled
-- ✅ Token added to .env file
-- ✅ Bot invited to Discord server
-- ✅ Deployment script completed successfully
-- ✅ Bot shows as online in Discord
-- ✅ `!help` command works
-- ✅ Agent commands respond correctly
+- Discord application created
+- Bot user created and token copied
+- Message Content Intent enabled
+- Token added to .env file
+- Bot invited to Discord server
+- Deployment script completed successfully
+- Bot shows as online in Discord
+- `!help` command works
+- Agent commands respond correctly
 
-**Your multi-agent Discord bot is ready to use!** 🚀
+**Your multi-agent Discord bot is ready to use!**
 
 ---
 

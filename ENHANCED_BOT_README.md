@@ -1,26 +1,26 @@
 # Enhanced Discord Bot with 84-Agent Integration
 
-## 🚀 Overview
+## Overview
 
-This Discord bot integrates your **84 specialized AI agents** with **Ollama local AI** to provide PhD-level research assistance directly through Discord. Perfect for cybersecurity and criminology research teams.
+This Discord bot integrates your **84 specialized AI agents** with **Ollama local AI** to provide -level research assistance directly through Discord. Perfect for cybersecurity and criminology research teams.
 
-## ✅ Features
+## Features
 
-### 🤖 Agent Integration
+### Agent Integration
 - **84 Specialized Agents**: Security, research, coding, analysis, and AI specialists
 - **Multi-Agent Workflows**: Chain agents for complex analysis
 - **Autonomous Research**: Independent research using multiple agents
 - **Local AI Processing**: Privacy-preserving with Ollama integration
 
-### 💬 Discord Commands
+### Discord Commands
 - `!agent <name> <query>` - Chat with specific agent
-- `!chain <agents> <query>` - Multi-agent workflows  
+- `!chain <agents> <query>` - Multi-agent workflows
 - `!research <topic>` - Autonomous research mode
 - `!agents` - List available agents by category
 - `!system` - Check system status
 - `!models` - List available AI models
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### Required Software
 ```bash
@@ -28,7 +28,7 @@ This Discord bot integrates your **84 specialized AI agents** with **Ollama loca
 sudo apt install -y python3 python3-discord python3-aiohttp python3-yaml
 
 # Ollama (if not installed)
-curl -fsSL https://ollama.ai/install.sh | sh
+curl -fsSL https/ollama.ai/install.sh | sh
 ollama pull llama3.2:3b
 ```
 
@@ -37,7 +37,7 @@ ollama pull llama3.2:3b
 - **84-Agent System**: Installed in ~/.config/warp/plugins/agents/
 - **Discord Bot Token**: From Discord Developer Portal
 
-## 🔧 Installation
+## Installation
 
 ### 1. Clone and Setup
 ```bash
@@ -50,7 +50,7 @@ Edit `.env` file:
 ```env
 # Discord Configuration
 DISCORD_TOKEN=your_bot_token_here
-OLLAMA_HOST=http://localhost:11434
+OLLAMA_HOST=http/localhost:11434
 DEFAULT_MODEL=llama3.2:3b
 
 # Rate Limiting (increased for research use)
@@ -62,7 +62,7 @@ LOG_LEVEL=INFO
 ```
 
 ### 3. Discord Bot Setup
-1. Go to https://discord.com/developers/applications
+1. Go to https/discord.com/developers/applications
 2. Create new application → Bot
 3. Copy bot token to `.env` file
 4. Enable "Message Content Intent"
@@ -77,7 +77,7 @@ python3 ~/.config/warp/ollama-agent-bridge.py --status
 python3 enhanced_agent_discord_bot.py --test
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Option 1: Manual Run
 ```bash
@@ -100,7 +100,7 @@ sudo systemctl status enhanced-discord-bot
 journalctl -u enhanced-discord-bot -f
 ```
 
-## 📱 Discord Usage Examples
+## Discord Usage Examples
 
 ### Basic Agent Chat
 ```
@@ -125,44 +125,44 @@ journalctl -u enhanced-discord-bot -f
 
 ### System Management
 ```
-!system        # Check bot and agent system status
-!agents        # List all available agents by category
-!models        # Show available AI models
+!system # Check bot and agent system status
+!agents # List all available agents by category
+!models # Show available AI models
 ```
 
-## 🎯 Agent Categories
+## Agent Categories
 
-### 🔒 Security Specialists
+### Security Specialists
 - `security-auditor` - Vulnerability assessment, OWASP compliance
 - `backend-security-coder` - Secure backend coding practices
 - `frontend-security-coder` - XSS prevention, CSP implementation
 - `mobile-security-coder` - Mobile security patterns
 
-### 📊 Research & Analysis  
+### Research & Analysis
 - `data-scientist` - Data analysis, SQL queries, BigQuery
 - `business-analyst` - Metrics analysis, KPI tracking
 - `risk-manager` - Risk assessment and management
 - `docs-architect` - Technical documentation
 
-### 💻 Development
+### Development
 - `python-pro` - Advanced Python development
 - `javascript-pro` - Modern JavaScript/Node.js
 - `backend-architect` - API design, microservices
 - `frontend-developer` - React, responsive design
 
-### 🧪 Quality & Testing
+### Quality & Testing
 - `test-automator` - Comprehensive test automation
 - `debugger` - Error resolution and analysis
 - `performance-engineer` - Application optimization
 - `error-detective` - Log analysis and debugging
 
-### 🤖 AI & ML
+### AI & ML
 - `ai-engineer` - LLM applications, RAG systems
 - `ml-engineer` - ML pipelines, model serving
 - `mlops-engineer` - ML infrastructure and operations
 - `prompt-engineer` - LLM prompt optimization
 
-## ⚙️ Configuration
+## ️ Configuration
 
 ### Rate Limiting
 - Default: 8 requests per user per minute
@@ -180,7 +180,7 @@ journalctl -u enhanced-discord-bot -f
 - Input validation and sanitization
 - Secure systemd service configuration
 
-## 🔍 Monitoring & Logs
+## Monitoring & Logs
 
 ### System Logs
 ```bash
@@ -204,7 +204,7 @@ htop
 ollama ps
 ```
 
-## 🛠️ Troubleshooting
+## ️ Troubleshooting
 
 ### Common Issues
 
@@ -229,7 +229,7 @@ python3 ~/.config/warp/ollama-agent-bridge.py --status
 ls -la ~/.config/warp/plugins/agents/agents/
 
 # Test Ollama connection
-curl http://localhost:11434/api/tags
+curl http/localhost:11434/api/tags
 ```
 
 **Rate Limiting Issues**
@@ -256,29 +256,29 @@ ollama pull llama3.2:1b
 ```
 
 ### Error Codes
-- `❌ Agent error` - Agent bridge communication failure
+- ` Agent error` - Agent bridge communication failure
 - `⏰ Rate limit exceeded` - User sending too many requests
-- `❌ Agent not found` - Invalid agent name
+- ` Agent not found` - Invalid agent name
 - `⏰ Agent request timed out` - Query too complex or system overloaded
 
-## 🚀 Advanced Configuration
+## Advanced Configuration
 
 ### Custom Agent Chains
 Create preset workflows in the bot configuration:
 ```python
 PRESET_CHAINS = {
-    'security-audit': 'security-auditor,backend-security-coder,test-automator',
-    'research-analysis': 'data-scientist,business-analyst,risk-manager',
-    'code-review': 'code-reviewer,security-auditor,performance-engineer'
+ 'security-audit': 'security-auditor,backend-security-coder,test-automator',
+ 'research-analysis': 'data-scientist,business-analyst,risk-manager',
+ 'code-review': 'code-reviewer,security-auditor,performance-engineer'
 }
 ```
 
 ### Model Optimization
 ```bash
 # Install specialized models
-ollama pull codellama:7b      # For coding tasks
-ollama pull mistral:7b        # For analysis tasks
-ollama pull llama3.2:1b       # For fast responses
+ollama pull codellama:7b # For coding tasks
+ollama pull mistral:7b # For analysis tasks
+ollama pull llama3.2:1b # For fast responses
 ```
 
 ### Integration with Other Services
@@ -286,7 +286,7 @@ ollama pull llama3.2:1b       # For fast responses
 - Database integration for conversation history
 - API endpoints for programmatic access
 
-## 📈 Performance Tuning
+## Performance Tuning
 
 ### For High Load
 ```env
@@ -302,7 +302,7 @@ CHAIN_WORKFLOW_COOLDOWN=10
 MAX_CONVERSATION_HISTORY=20
 ```
 
-## 🔐 Security Considerations
+## Security Considerations
 
 ### Production Deployment
 1. Use environment variables for sensitive data
@@ -317,7 +317,7 @@ MAX_CONVERSATION_HISTORY=20
 - Conversation data stays on your server
 - Configurable data retention policies
 
-## 📚 API Reference
+## API Reference
 
 ### Bot Commands
 | Command | Cooldown | Description |
@@ -338,7 +338,7 @@ MAX_CONVERSATION_HISTORY=20
 | Analysis | 4 | performance-engineer, debugger |
 | AI/ML | 4 | ai-engineer, ml-engineer |
 
-## 🤝 Support
+## Support
 
 ### Getting Help
 1. Check system status: `!system`
@@ -354,4 +354,4 @@ MAX_CONVERSATION_HISTORY=20
 
 ---
 
-**🎯 You now have a complete AI-powered Discord bot with 84 specialized agents!** Perfect for research teams, PhD students, and cybersecurity professionals who need powerful AI assistance accessible through Discord.
+** You now have a complete AI-powered Discord bot with 84 specialized agents!** Perfect for research teams, students, and cybersecurity professionals who need powerful AI assistance accessible through Discord.
