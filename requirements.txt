@@ -5,7 +5,7 @@ aiohttp>=3.8.0
 # Async Support
 aiofiles>=23.2.0
 
-# Scheduling and Tasks  
+# Scheduling and Tasks
 APScheduler>=3.10.4
 
 # Environment Management

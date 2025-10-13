@@ -1,22 +1,22 @@
-# 🚀 Advanced Discord Bot Launcher - GUI Version
+# Advanced Discord Bot Launcher - GUI Version
 
 A modern, comprehensive graphical user interface for managing, organizing, and extending Discord bots with powerful automation and monitoring features.
 
-![Bot Launcher](https://img.shields.io/badge/Bot%20Launcher-GUI%20v2.0-blue)
-![Python](https://img.shields.io/badge/Python-3.8+-green)
-![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+![Bot Launcher](https/img.shields.io/badge/Bot%20Launcher-GUI%20v2.0-blue)
+![Python](https/img.shields.io/badge/Python-3.8+-green)
+![Platform](https/img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey)
+![License](https/img.shields.io/badge/License-MIT-yellow)
 
-## ✨ Features
+## Features
 
-### 🎨 Modern GUI Interface
+### Modern GUI Interface
 - **Clean, intuitive design** with dark/light theme support
 - **Tabbed interface** for organized functionality
 - **Real-time status monitoring** with visual indicators
 - **Responsive layout** that adapts to different screen sizes
 - **Keyboard shortcuts** for power users
 
-### 🤖 Bot Management
+### Bot Management
 - **Visual bot lifecycle management** (start/stop/restart)
 - **Template-based bot creation** with preview
 - **Real-time process monitoring** with PID tracking
@@ -24,38 +24,38 @@ A modern, comprehensive graphical user interface for managing, organizing, and e
 - **Bulk operations** (start all, stop all)
 - **Import/export** bot configurations
 
-### 🛠️ Development Tools
+### ️ Development Tools
 - **Code templates** for different bot types:
-  - Basic Discord bot with essential commands
-  - Research assistant with SQLite integration
-  - Minimal ping/pong bot
-  - Enhanced modular architecture
+ - Basic Discord bot with essential commands
+ - Research assistant with SQLite integration
+ - Minimal ping/pong bot
+ - Enhanced modular architecture
 - **Live code preview** in template creator
 - **Syntax highlighting** and validation
 - **Integrated logs viewer** with filtering
 
-### 📊 Monitoring & Analytics
+### Monitoring & Analytics
 - **Real-time status dashboard** with visual indicators
 - **Process monitoring** and resource usage
 - **Error tracking** and log analysis
 - **Performance metrics** and statistics
 - **Health checks** and automated alerts
 
-### 🧩 Module System
+### Module System
 - **Plugin architecture** for extensibility
 - **Module marketplace** integration
 - **Dependency management** and version control
 - **Auto-updates** for installed modules
 - **Custom module creation** tools
 
-### 🔗 GitHub Integration
+### GitHub Integration
 - **Repository cloning** and synchronization
 - **Branch management** and switching
 - **Automated deployment** workflows
 - **Version control** integration
 - **Collaborative development** features
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -66,21 +66,21 @@ A modern, comprehensive graphical user interface for managing, organizing, and e
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd ollama-discord-bot
-   ```
+ ```bash
+ git clone <repository-url>
+ cd ollama-discord-bot
+ ```
 
 2. **Launch the GUI:**
-   ```bash
-   ./launch_ultimate.sh gui
-   ```
+ ```bash
+ ./launch_ultimate.sh gui
+ ```
 
 3. **Or use the setup command first:**
-   ```bash
-   ./launch_ultimate.sh setup
-   ./launch_ultimate.sh gui
-   ```
+ ```bash
+ ./launch_ultimate.sh setup
+ ./launch_ultimate.sh gui
+ ```
 
 ### Alternative Launch Methods
 
@@ -99,16 +99,16 @@ A modern, comprehensive graphical user interface for managing, organizing, and e
 ./launch_ultimate.sh help
 ```
 
-## 🎮 Usage Guide
+## Usage Guide
 
 ### Creating Your First Bot
 
 1. **Open the Bot Creator tab**
 2. **Fill in bot details:**
-   - Bot name (required)
-   - Description (optional)
-   - Select template (basic, research_assistant, minimal, clean_enhanced)
-   - Set port number
+ - Bot name (required)
+ - Description (optional)
+ - Select template (basic, research_assistant, minimal, clean_enhanced)
+ - Set port number
 3. **Preview the template** in the preview pane
 4. **Click "Create Bot"** to generate the bot files
 5. **Switch to Dashboard** to see your new bot
@@ -118,12 +118,12 @@ A modern, comprehensive graphical user interface for managing, organizing, and e
 #### Dashboard Operations
 - **View all bots** in the main dashboard table
 - **Select a bot** and use control buttons:
-  - ▶️ Start - Launch the bot process
-  - ⏹️ Stop - Terminate the bot process
-  - 🔄 Restart - Stop and start the bot
-  - ⚙️ Configure - Edit bot settings
-  - 📊 Logs - View bot logs
-  - 🗑️ Delete - Remove the bot
+ - ▶️ Start - Launch the bot process
+ - ⏹️ Stop - Terminate the bot process
+ - Restart - Stop and start the bot
+ - ️ Configure - Edit bot settings
+ - Logs - View bot logs
+ - ️ Delete - Remove the bot
 
 #### Context Menu
 - **Right-click any bot** for quick actions
@@ -151,7 +151,7 @@ A modern, comprehensive graphical user interface for managing, organizing, and e
 - **Network and security** settings
 - **Backup and restore** options
 
-## 🎨 GUI Components
+## GUI Components
 
 ### Main Window
 - **Menu bar** with File, Bots, Tools, View, Help menus
@@ -161,7 +161,7 @@ A modern, comprehensive graphical user interface for managing, organizing, and e
 
 ### Bot Dashboard
 - **Table view** with sortable columns
-- **Status indicators** (🟢 running, 🔴 stopped)
+- **Status indicators** ( running, stopped)
 - **Process information** (PID, port, modules)
 - **Action buttons** for bot control
 - **Search and filter** functionality
@@ -200,7 +200,7 @@ A modern, comprehensive graphical user interface for managing, organizing, and e
 | `Ctrl+T` | New tab |
 | `Ctrl+W` | Close tab |
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -225,7 +225,7 @@ export DEBUG=1
 - `launcher.db` - SQLite database for tracking
 - `launcher.log` - Application logs
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -263,7 +263,7 @@ Enable debug mode for detailed logging:
 DEBUG=1 ./launch_ultimate.sh gui
 ```
 
-## 🤝 Contributing
+## Contributing
 
 ### Development Setup
 
@@ -297,18 +297,18 @@ pip install -r requirements-dev.txt
 5. Update documentation
 6. Submit a pull request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Discord.py** community for the excellent library
 - **Tkinter** developers for the GUI framework
 - **Python** community for the amazing ecosystem
 - **Contributors** who help improve this project
 
-## 📞 Support
+## Support
 
 - **GitHub Issues**: Report bugs and request features
 - **Discussions**: Ask questions and share ideas
@@ -317,4 +317,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ for the Discord bot development community**
+**Made with ️ for the Discord bot development community**

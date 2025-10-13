@@ -1,27 +1,27 @@
-# Clean Enhanced Discord Bot - PhD Research Assistant
+# Clean Enhanced Discord Bot - Research Assistant
 
-🎓 **Academic Research-Focused Discord Bot** - A clean, secure Discord bot designed for PhD research environments with all cybersecurity/hacking features removed.
+ **Academic Research-Focused Discord Bot** - A clean, secure Discord bot designed for research environments with all cybersecurity/hacking features removed.
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
-[![Discord.py](https://img.shields.io/badge/discord.py-2.x-blue.svg)](https://discordpy.readthedocs.io/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Python 3.x](https/img.shields.io/badge/python-3.x-blue.svg)](https/www.python.org/)
+[![Discord.py](https/img.shields.io/badge/discord.py-2.x-blue.svg)](https/discordpy.readthedocs.io/)
+[![License](https/img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## Overview
 
-This Discord bot provides a secure, academic-focused environment for PhD researchers. It includes safe terminal access, AI agent integration, and research data webhooks while maintaining strict security boundaries.
+This Discord bot provides a secure, academic-focused environment for researchers. It includes safe terminal access, AI agent integration, and research data webhooks while maintaining strict security boundaries.
 
 ## Features
 
-### ✅ Core Capabilities
-- **🖥️ Secure Terminal**: Sandboxed terminal with whitelisted commands only
-- **🤖 AI Agent Integration**: Connect with Ollama models for research assistance  
-- **📊 Webhook Server**: Research data integration and notifications
-- **📈 Performance Monitoring**: Command statistics and system metrics
-- **🗃️ Database Logging**: SQLite-based audit trails and user tracking
+### Core Capabilities
+- **️ Secure Terminal**: Sandboxed terminal with whitelisted commands only
+- ** AI Agent Integration**: Connect with Ollama models for research assistance
+- ** Webhook Server**: Research data integration and notifications
+- ** Performance Monitoring**: Command statistics and system metrics
+- **️ Database Logging**: SQLite-based audit trails and user tracking
 - **⏰ Scheduled Tasks**: Automatic cleanup and maintenance
-- **🛡️ Rate Limiting**: Built-in protection against spam and abuse
+- **️ Rate Limiting**: Built-in protection against spam and abuse
 
-### ❌ Security Features Removed
+### Security Features Removed
 - All network scanning tools (nmap, netstat, ss)
 - Security testing frameworks (Metasploit, Burp Suite)
 - Password cracking tools (hashcat, john)
@@ -42,7 +42,7 @@ This Discord bot provides a secure, academic-focused environment for PhD researc
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/ollama-discord-bot.git
+git clone https/github.com/yourusername/ollama-discord-bot.git
 cd ollama-discord-bot
 ```
 
@@ -106,10 +106,10 @@ DEBUG_MODE=true
 ### Webhook Integration
 Send research data to Discord channels:
 ```bash
-curl -X POST http://localhost:8085/webhook/research \\
-  -H "Authorization: Bearer your_webhook_secret" \\
-  -H "Content-Type: application/json" \\
-  -d '{"channel_id": "123456789", "message": "Analysis complete"}'
+curl -X POST http/localhost:8085/webhook/research \\
+ -H "Authorization: Bearer your_webhook_secret" \\
+ -H "Content-Type: application/json" \\
+ -d '{"channel_id": "123456789", "message": "Analysis complete"}'
 ```
 
 ## Security & Safety
@@ -123,7 +123,7 @@ curl -X POST http://localhost:8085/webhook/research \\
 
 ### Rate Limiting
 - Terminal creation: 3 per 5 minutes
-- Command execution: 10 per minute  
+- Command execution: 10 per minute
 - Agent queries: 5 per minute
 
 ### Audit Logging
@@ -137,12 +137,12 @@ All activities logged to SQLite database:
 
 ### Project Structure
 ```
-├── clean_enhanced_bot.py      # Main bot application
-├── CLEAN_BOT_README.md       # Detailed documentation
-├── requirements.txt          # Python dependencies
-├── .env                      # Environment configuration
-├── .gitignore               # Git exclusions
-└── README.md                # This file
+├── clean_enhanced_bot.py # Main bot application
+├── CLEAN_BOT_README.md # Detailed documentation
+├── requirements.txt # Python dependencies
+├── .env # Environment configuration
+├── .gitignore # Git exclusions
+└── README.md # This file
 ```
 
 ### Adding Features
@@ -186,8 +186,8 @@ After=network.target
 [Service]
 Type=simple
 User=your_user
-WorkingDirectory=/path/to/bot
-ExecStart=/usr/bin/python3 clean_enhanced_bot.py
+WorkingDirectorypath/to/bot
+ExecStartusr/bin/python3 clean_enhanced_bot.py
 Restart=always
 RestartSec=10
 
@@ -199,12 +199,12 @@ WantedBy=multi-user.target
 
 ### Academic Research Workflow
 ```
-1. /terminal                           # Create secure session
-2. /term git clone https://repo.git    # Clone research repository  
-3. /term ls -la                        # Explore project structure
-4. /term python3 analysis.py           # Run data analysis
-5. /agent research "interpret results"  # Get AI insights
-6. /debug                              # Monitor performance
+1. /terminal # Create secure session
+2. /term git clone https/repo.git # Clone research repository
+3. /term ls -la # Explore project structure
+4. /term python3 analysis.py # Run data analysis
+5. /agent research "interpret results" # Get AI insights
+6. /debug # Monitor performance
 ```
 
 ### Safe Development Tasks
@@ -236,8 +236,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Academic Context
 
-This bot was developed specifically for PhD research environments where security tools need to be removed while maintaining development functionality. It provides a safe, monitored environment for academic collaboration and research automation.
+This bot was developed specifically for research environments where security tools need to be removed while maintaining development functionality. It provides a safe, monitored environment for academic collaboration and research automation.
 
 ---
 
-🔬 **Clean PhD Research Bot** - Academic-focused, security tools removed, safe for educational environments.
+ **Clean Research Bot** - Academic-focused, security tools removed, safe for educational environments.

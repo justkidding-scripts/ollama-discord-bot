@@ -1,36 +1,36 @@
-# Enhanced Discord Bot V2 - PhD Research Assistant
+# Enhanced Discord Bot V2 - Research Assistant
 
-## 🚀 Features Overview
+## Features Overview
 
-This enhanced Discord bot integrates **84 AI Agents** via Ollama with **secure terminal access**, **webhook integrations**, and **scheduled research data collection** for advanced PhD-level cybersecurity and criminology research.
+This enhanced Discord bot integrates **84 AI Agents** via Ollama with **secure terminal access**, **webhook integrations**, and **scheduled research data collection** for advanced -level cybersecurity and criminology research.
 
-### ✨ New Features in V2
+### New Features in V2
 
-1. **🖥️ Secure Discord Terminal**
-   - Command filtering and whitelist security
-   - Session management with timeouts
-   - Working directory tracking
-   - Real-time command execution
+1. **️ Secure Discord Terminal**
+ - Command filtering and whitelist security
+ - Session management with timeouts
+ - Working directory tracking
+ - Real-time command execution
 
-2. **🔗 Webhook Integration System**
-   - Research data collection endpoints
-   - Real-time alert notifications  
-   - External tool integration
-   - HTTP API with authentication
+2. ** Webhook Integration System**
+ - Research data collection endpoints
+ - Real-time alert notifications
+ - External tool integration
+ - HTTP API with authentication
 
 3. **⏰ Scheduled Tasks**
-   - Automated research data collection
-   - Terminal session cleanup
-   - System metrics reporting
-   - Periodic maintenance tasks
+ - Automated research data collection
+ - Terminal session cleanup
+ - System metrics reporting
+ - Periodic maintenance tasks
 
-4. **🛡️ Enhanced Security**
-   - Command whitelist/blacklist system
-   - Rate limiting per user
-   - Secure execution environment
-   - Session timeout protection
+4. **️ Enhanced Security**
+ - Command whitelist/blacklist system
+ - Rate limiting per user
+ - Secure execution environment
+ - Session timeout protection
 
-## 📋 Command Reference
+## Command Reference
 
 ### Terminal Commands
 - `!terminal` - Create a new secure terminal session
@@ -38,7 +38,7 @@ This enhanced Discord bot integrates **84 AI Agents** via Ollama with **secure t
 - `!terminals` - List your active terminal sessions
 - `!close_terminal [session_id]` - Close terminal session(s)
 
-### Agent Commands  
+### Agent Commands
 - `!agent <agent_name> <query>` - Chat with specific AI agent
 - `!agents` - List all available agents
 
@@ -47,7 +47,7 @@ This enhanced Discord bot integrates **84 AI Agents** via Ollama with **secure t
 - `!webhook_info` - Display webhook configuration
 - `!help` - Show command help (standard Discord.py)
 
-## 🖥️ Terminal Usage
+## ️ Terminal Usage
 
 ### Creating a Terminal
 ```
@@ -79,10 +79,10 @@ This creates a secure terminal session with:
 - System: `sudo`, `systemctl`, `kill`, `shutdown`
 - Process: `nohup`, `bg`, `fg`, `disown`
 
-## 🔗 Webhook API
+## Webhook API
 
 ### Base Configuration
-- **URL:** `http://localhost:8085`
+- **URL:** `http/localhost:8085`
 - **Authentication:** Bearer token (`WEBHOOK_SECRET`)
 - **Content-Type:** `application/json`
 
@@ -91,9 +91,9 @@ This creates a secure terminal session with:
 
 ```json
 {
-  "channel_id": "123456789012345678",
-  "message": "Research data collected",
-  "details": "Additional context information"
+ "channel_id": "123456789012345678",
+ "message": "Research data collected",
+ "details": "Additional context information"
 }
 ```
 
@@ -108,9 +108,9 @@ Content-Type: application/json
 
 ```json
 {
-  "channel_id": "123456789012345678",
-  "type": "warning",
-  "message": "System alert triggered"
+ "channel_id": "123456789012345678",
+ "type": "warning",
+ "message": "System alert triggered"
 }
 ```
 
@@ -122,10 +122,10 @@ Alert types: `info`, `warning`, `error`, `success`
 Returns system health information:
 ```json
 {
-  "status": "online",
-  "bot_guilds": 1,
-  "active_terminals": 2,
-  "timestamp": "2025-10-12T09:00:00.000Z"
+ "status": "online",
+ "bot_guilds": 1,
+ "active_terminals": 2,
+ "timestamp": "2025-10-12T0900.000Z"
 }
 ```
 
@@ -142,17 +142,17 @@ Returns system health information:
 - Tracks usage patterns
 - Performance monitoring
 
-## 📊 System Monitoring
+## System Monitoring
 
 The bot automatically tracks:
 - **Active terminal sessions**
-- **Memory usage**  
+- **Memory usage**
 - **Disk usage**
 - **System load average**
 - **Connected Discord servers**
 - **Command execution rates**
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 ```bash
@@ -162,12 +162,12 @@ WEBHOOK_PORT=8085
 WEBHOOK_SECRET=research_webhook_secret
 
 # Terminal Settings
-TERMINAL_TIMEOUT=300          # 5 minutes
-MAX_TERMINALS_PER_USER=3      # Per user limit
+TERMINAL_TIMEOUT=300 # 5 minutes
+MAX_TERMINALS_PER_USER=3 # Per user limit
 
 # Rate Limiting
-RATE_LIMIT_PER_USER=10        # Commands per minute
-RATE_LIMIT_WINDOW=60          # Time window
+RATE_LIMIT_PER_USER=10 # Commands per minute
+RATE_LIMIT_WINDOW=60 # Time window
 ```
 
 ### Security Settings
@@ -176,11 +176,11 @@ RATE_LIMIT_WINDOW=60          # Time window
 TERMINAL_SECURITY_MODE=strict
 TERMINAL_LOG_COMMANDS=true
 
-# Webhook Security  
+# Webhook Security
 WEBHOOK_SECRET=ultra_enhanced_webhook_secret_2024
 ```
 
-## 🚦 Running the Bot
+## Running the Bot
 
 ### Manual Start
 ```bash
@@ -199,14 +199,14 @@ ps aux | grep enhanced_discord_bot_v2.py
 tail -f enhanced_bot.out
 ```
 
-## 🛠️ Troubleshooting
+## ️ Troubleshooting
 
 ### Terminal Issues
 - **Session expired:** Use `!terminal` to create new session
 - **Command blocked:** Check allowed commands list
 - **Permission denied:** Commands run as bot user only
 
-### Webhook Issues  
+### Webhook Issues
 - **Port conflicts:** Change `WEBHOOK_PORT` in .env
 - **Authentication:** Verify `WEBHOOK_SECRET` matches
 - **Network:** Check firewall rules for webhook port
@@ -216,21 +216,21 @@ tail -f enhanced_bot.out
 - **Bridge issues:** Verify ollama-agent-bridge.py exists
 - **Model errors:** Check Ollama service status
 
-## 📁 File Structure
+## File Structure
 ```
 /home/nike/ollama-discord-bot/
-├── enhanced_discord_bot_v2.py      # Main bot code
-├── ollama-agent-bridge.py          # Agent integration
-├── start_enhanced_bot.sh           # Startup script
-├── .env                            # Configuration
-├── enhanced_bot.out                # Runtime logs
-├── enhanced_discord_bot.log        # Application logs
-└── SERVER_SETUP_GUIDE.md          # Discord server setup
+├── enhanced_discord_bot_v2.py # Main bot code
+├── ollama-agent-bridge.py # Agent integration
+├── start_enhanced_bot.sh # Startup script
+├── .env # Configuration
+├── enhanced_bot.out # Runtime logs
+├── enhanced_discord_bot.log # Application logs
+└── SERVER_SETUP_GUIDE.md # Discord server setup
 ```
 
-## 🔬 Research Applications
+## Research Applications
 
-### PhD Cybersecurity Research
+### Cybersecurity Research
 - **Terminal access** for real-time analysis
 - **Agent consultation** for expert insights
 - **Webhook integration** with research tools
@@ -242,7 +242,7 @@ tail -f enhanced_bot.out
 - **Real-time alerts** for incident tracking
 - **Scheduled reporting** for longitudinal studies
 
-## 🎯 Next Steps
+## Next Steps
 
 1. **Add bot to Discord server** using invite link
 2. **Test terminal functionality** with basic commands
@@ -250,14 +250,14 @@ tail -f enhanced_bot.out
 4. **Set up research data collection** channels
 5. **Customize agent workflows** for specific studies
 
-## 📞 Support
+## Support
 
 The bot includes comprehensive error handling and logging. Check:
 - `enhanced_bot.out` for runtime logs
-- `enhanced_discord_bot.log` for application logs  
+- `enhanced_discord_bot.log` for application logs
 - Discord channel messages for user feedback
 - Webhook endpoints for integration status
 
 ---
 
-**Enhanced Discord Bot V2** - Empowering PhD research with AI agents, secure terminals, and intelligent automation. 🚀🔬
+**Enhanced Discord Bot V2** - Empowering research with AI agents, secure terminals, and intelligent automation. 

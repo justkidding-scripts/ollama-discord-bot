@@ -1,6 +1,6 @@
-# 🚀 Ultra Enhanced Discord Bot - Research Features
+# Ultra Enhanced Discord Bot - Research Features
 
-## 🎯 Advanced RAG Integration
+## Advanced RAG Integration
 
 ### **Knowledge Base Management**
 - **ChromaDB Vector Storage** - Persistent semantic search capabilities
@@ -14,7 +14,7 @@
 - `/rag_ask question:string` - RAG-enhanced Q&A with context
 - `/rag_stats` - Knowledge base statistics and analytics
 
-## 🔧 GitHub Automation
+## GitHub Automation
 
 ### **Research Session Management**
 - **Automatic Tracking** - File modifications, timestamps, findings
@@ -29,23 +29,23 @@
 - `/git_commit message:string` - Manual commit with custom message
 - `/enable_automation` - Enable auto-commit and auto-push
 
-## 🎯 Key Features
+## Key Features
 
 ### **Automated Workflows**
-- ✅ **Auto-commit** - Every 5 minutes (configurable)
-- ✅ **Auto-push** - Every 30 minutes (configurable)  
-- ✅ **Session Tracking** - Research sessions with metadata
-- ✅ **Documentation** - Auto-generated research summaries
-- ✅ **File Tracking** - Monitor modifications during sessions
+- **Auto-commit** - Every 5 minutes (configurable)
+- **Auto-push** - Every 30 minutes (configurable)
+- **Session Tracking** - Research sessions with metadata
+- **Documentation** - Auto-generated research summaries
+- **File Tracking** - Monitor modifications during sessions
 
 ### **Enhanced Research Capabilities**
-- 🔍 **Semantic Search** - Vector-based document retrieval
-- 📚 **Multi-Database** - ArXiv, Google Scholar integration
-- 📄 **PDF Processing** - Automatic text extraction and indexing
-- 🤖 **RAG-Enhanced AI** - Context-aware responses with sources
-- 📊 **Analytics** - Research metrics and progress tracking
+- **Semantic Search** - Vector-based document retrieval
+- **Multi-Database** - ArXiv, Google Scholar integration
+- **PDF Processing** - Automatic text extraction and indexing
+- **RAG-Enhanced AI** - Context-aware responses with sources
+- **Analytics** - Research metrics and progress tracking
 
-## 🚀 Usage Examples
+## Usage Examples
 
 ### Starting a Research Session
 ```
@@ -69,7 +69,7 @@ Identified key patterns in current research
 Discovered novel applications"
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 ```bash
@@ -77,34 +77,34 @@ Discovered novel applications"
 RESEARCH_DATA_DIR=./rag_data
 EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 
-# GitHub Automation  
+# GitHub Automation
 GITHUB_TOKEN=your_github_token_here
-GIT_PYTHON_GIT_EXECUTABLE=/usr/bin/git
+GIT_PYTHON_GIT_EXECUTABLEusr/bin/git
 
 # Automation Settings
 AUTO_COMMIT_INTERVAL=300
 AUTO_PUSH_INTERVAL=1800
 ```
 
-## 📊 System Architecture
+## System Architecture
 
 ```
 Discord Bot (Enhanced)
 ├── RAG System (ChromaDB + Sentence Transformers)
-│   ├── Vector Storage
-│   ├── Document Processing
-│   └── Semantic Search
+│ ├── Vector Storage
+│ ├── Document Processing
+│ └── Semantic Search
 ├── GitHub Automation
-│   ├── Session Tracking
-│   ├── Auto-commit/push
-│   └── Documentation Generation
+│ ├── Session Tracking
+│ ├── Auto-commit/push
+│ └── Documentation Generation
 └── Webhook Server
-    ├── GitHub Webhooks
-    ├── Monitoring Integration
-    └── CI/CD Pipeline Support
+ ├── GitHub Webhooks
+ ├── Monitoring Integration
+ └── CI/CD Pipeline Support
 ```
 
-## 🎯 Research Workflow
+## Research Workflow
 
 1. **Start Session** → Creates branch, begins tracking
 2. **Research & Query** → Use RAG commands for investigation
@@ -112,7 +112,7 @@ Discord Bot (Enhanced)
 4. **End Session** → Commits changes, generates summary
 5. **Auto-Documentation** → Updates README, creates research index
 
-## 📈 Advanced Analytics
+## Advanced Analytics
 
 - **Research Velocity** - Sessions per day/week
 - **Knowledge Growth** - Documents added over time
@@ -122,6 +122,6 @@ Discord Bot (Enhanced)
 
 ---
 
-**🔬 Perfect for PhD Research Across All Disciplines**
+** Perfect for Research Across All Disciplines**
 
 This system provides comprehensive automation for academic research workflows, combining the power of AI-enhanced information retrieval with automated version control and documentation generation.
